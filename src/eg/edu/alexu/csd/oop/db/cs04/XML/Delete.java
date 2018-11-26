@@ -2,6 +2,7 @@ package eg.edu.alexu.csd.oop.db.cs04.XML;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,21 +18,19 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class Update {
+public class Delete {
 
 	private String tableName;
-	private Object[][] update_value;
 	private Object[] condition;
 
-	public Update(String tableName, Object[][] update_value, Object[] condition) {
+	public Delete(String tableName, Object[] condition) {
 		this.tableName = tableName;
 		this.condition = condition;
-		this.update_value = update_value;
-		update();
+		delete();
 	}
 
-	private void update() {
-
+	private void delete() {
+		// TODO Auto-generated method stub
 		try {
 			String filepath = "dbs\\db1\\" + tableName + ".xml";
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -42,7 +41,7 @@ public class Update {
 			NodeList rows = doc.getElementsByTagName("row");
 
 			// loop over all rows
-			for (int i = 0; i < rows.getLength(); i++) {
+			for (int i = rows.getLength() - 1; i >= 0; i--) {
 				// get row from rows list.
 				Node nNode = rows.item(i);
 				// Check rows has elements.
@@ -51,9 +50,9 @@ public class Update {
 					Element col = (Element) nNode;
 
 					if (condition != null) {
-						updateWithCondition(col);
+						deleteWithCondition(nNode, col);
 					} else {
-						updateWithoutCondition(col);
+						deleteWithoutCondition(nNode, col);
 					}
 				}
 			}
@@ -80,26 +79,19 @@ public class Update {
 		}
 	}
 
-	private void updateWithoutCondition(Element col) {
+	private void deleteWithoutCondition(Node nNode, Element col) {
 		// TODO Auto-generated method stub
-		for (int j = 0; j < update_value[0].length; j++) {
-			// Update cols.
-			col.getElementsByTagName(update_value[0][j].toString()).item(0)
-					.setTextContent(update_value[1][j].toString());
-		}
+		// delete parent of col.
+		nNode.getParentNode().removeChild(col);
 	}
 
-	private void updateWithCondition(Element col) {
+	private void deleteWithCondition(Node nNode, Element col) {
 		// TODO Auto-generated method stub
-		// Check update's condition.
+		// Check delete's condition.
 		if (col.getElementsByTagName(condition[0].toString()).item(0).getTextContent()
 				.equals(condition[1].toString())) {
-			// Loop over cols to update.
-			for (int j = 0; j < update_value[0].length; j++) {
-				// Update cols.
-				col.getElementsByTagName(update_value[0][j].toString()).item(0)
-						.setTextContent(update_value[1][j].toString());
-			}
+			// delete parent of col.
+			nNode.getParentNode().removeChild(col);
 		}
 	}
 }
