@@ -12,28 +12,34 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 public class writeXML {
-    public void writeXML(String path) {
+    public void writeXML(String path, String name, String[][] cols) {
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.newDocument();
 
-            //App element
-            Element root = document.createElement("DrawOOP");
+            //Table tag element
+            Element root = document.createElement(name);
             document.appendChild(root);
 
-            //Canvas element
-            Element canvas = document.createElement("Canvas");
-            root.appendChild(canvas);
-
-            //WE PUT A LOOP ON SHAPES ARRAY HERE
-            //Shapes element
-            int ii = 0;
-
+            //fill rows
+            Element[] rows = new Element[cols.length-1];
+            int ii=1;
+            for (Element row : rows) {
+                row = document.createElement("row");
+                for (int i = 0; i < cols[0].length; i++) {
+                    Element temp = document.createElement(cols[0][i]);
+                    temp.setTextContent(cols[ii][i]);
+                    row.appendChild(temp);
+                }
+                root.appendChild(row);
+                ii++;
+            }
 
             //saving the file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+//            document.getDocumentElement().normalize();
             DOMSource domSource = new DOMSource(document);
             StreamResult streamResult = new StreamResult(new File(path));
             transformer.transform(domSource, streamResult);
