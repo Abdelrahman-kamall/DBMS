@@ -1,10 +1,13 @@
 package eg.edu.alexu.csd.oop.db.cs04.XML;
 
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -36,13 +39,27 @@ public class writeXML {
                 ii++;
             }
 
-            //saving the file
+//            //saving the file
+//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//            Transformer transformer = transformerFactory.newTransformer();
+////            document.getDocumentElement().normalize();
+//            DOMSource domSource = new DOMSource(document);
+//            StreamResult streamResult = new StreamResult(new File(path));
+//            transformer.transform(domSource, streamResult);
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
-//            document.getDocumentElement().normalize();
-            DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(path));
-            transformer.transform(domSource, streamResult);
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            DOMImplementation domImpl = document.getImplementation();
+
+            DocumentType doctype = domImpl.createDocumentType("doctype","",
+                    name+".dtd");
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File(path));
+            transformer.transform(source, result);
 
 
         } catch (Exception e) {
