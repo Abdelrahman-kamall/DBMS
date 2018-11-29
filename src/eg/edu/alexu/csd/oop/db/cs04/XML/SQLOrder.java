@@ -1,5 +1,8 @@
 package eg.edu.alexu.csd.oop.db.cs04.XML;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+
 public class SQLOrder {
 
     private boolean firstInstance = true;
@@ -18,7 +21,11 @@ public class SQLOrder {
     }
 
     public void dropDatabase(String database) {
-        //TODO use class DropDatabase
+        try {
+            DeleteDataBase.deleteDirectoryStream(Paths.get(database));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createTable(String[][] input, String tablename) {
