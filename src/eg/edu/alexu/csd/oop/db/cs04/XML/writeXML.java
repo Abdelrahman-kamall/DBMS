@@ -15,7 +15,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 public class writeXML {
-    public void writeXML(String path, String name, String[][] cols) {
+    public static void writeXML(String path, String name) {
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -26,18 +26,18 @@ public class writeXML {
             document.appendChild(root);
 
             //fill rows
-            Element[] rows = new Element[cols.length-1];
-            int ii=1;
-            for (Element row : rows) {
-                row = document.createElement("row");
-                for (int i = 0; i < cols[0].length; i++) {
-                    Element temp = document.createElement(cols[0][i]);
-                    temp.setTextContent(cols[ii][i]);
-                    row.appendChild(temp);
-                }
-                root.appendChild(row);
-                ii++;
-            }
+//            Element[] rows = new Element[cols.length-1];
+//            int ii=1;
+//            for (Element row : rows) {
+//                row = document.createElement("row");
+//                for (int i = 0; i < cols[0].length; i++) {
+//                    Element temp = document.createElement(cols[0][i]);
+//                    temp.setTextContent(cols[ii][i]);
+//                    row.appendChild(temp);
+//                }
+//                root.appendChild(row);
+//                ii++;
+//            }
 
 //            //saving the file
 //            TransformerFactory transformerFactory = TransformerFactory.newInstance();

@@ -12,12 +12,11 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
 public class DTDGenerator {
-    public void writeDTD(String path, String name, String[] cols) {
+    public static void writeDTD(String path, String name, String[] cols) {
         try {
             File ff = new File(path);
             System.out.println(ff.createNewFile());
@@ -28,7 +27,7 @@ public class DTDGenerator {
             fw.write("\t<!ELEMENT row (");
             for (int i = 0; i < cols.length; i++) {
                 fw.write(cols[i]);
-                if(i+1<cols.length)
+                if (i + 1 < cols.length)
                     fw.write(",");
             }
             fw.write(")>\n");
@@ -44,4 +43,25 @@ public class DTDGenerator {
             e.printStackTrace();
         }
     }
+
+    public static String[] getDTDTables(String path) {
+        String[] x = null;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
+            bufferedReader.readLine();
+            bufferedReader.readLine();
+            String regex = "[\\(,\\)]";
+            x = bufferedReader.readLine().split(regex);
+            String[] cols = new String[x.length-2];
+            for (int i=1;i<x.length-1;i++) {
+                cols[i-1]=x[i];
+                System.out.println(x[i]);
+            }
+            return cols;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+
 }

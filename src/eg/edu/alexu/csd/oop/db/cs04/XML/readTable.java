@@ -12,11 +12,13 @@ import java.io.File;
 public class readTable {
 
     private String tableName;
-    private boolean[][] selected;
+    private Object[] selected;
+    private Object[][] condition;
 
-    public readTable(String tableName, boolean[][] selected) {
+    public readTable(String tableName, Object[][] condition, Object[] selected) {
         this.tableName = tableName;
         this.selected = selected;
+        this.condition= condition;
         readXML("dbs\\db1\\t1.xml");
     }
 
@@ -40,6 +42,9 @@ public class readTable {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     // Access cols in this row.
                     Element col = (Element) nNode;
+                    if(condition != null){
+//                        if()
+                    }
                 }
             }
 
