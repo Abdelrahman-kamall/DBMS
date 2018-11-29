@@ -10,7 +10,7 @@ public class createDataBase {
     }
 
     private void create(){
-        File theDir = new File("dbs\\dbName");
+        File theDir = new File("dbs\\" + dbName);
 
         // if the directory does not exist, create it
         if (!theDir.exists()) {

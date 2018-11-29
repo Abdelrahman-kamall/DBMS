@@ -9,16 +9,39 @@ public class SQLOrder {
     private SQLOrder() {
     }
 
-    private String getDatabase() {
-        return database;
+    public static SQLOrder getInstance() {
+        return instance;
     }
 
-    private void setDatabase(String database) {
+    public void createDatabase(String database) {
         this.database = database;
     }
 
-    public static SQLOrder getInstance(String database) {
-        instance.setDatabase(database);
-        return instance;
+    public void dropDatabase(String database) {
+        //TODO use class DropDatabase
+    }
+
+    public void createTable(String[][] input, String tablename) {
+        createTable.createTable(input, tablename);
+    }
+
+    public void dropTable(String tablename) {
+        dropTable dropTable = new dropTable(tablename);
+    }
+
+    public void update(String tableName, Object[][] update_value, Object[] condition) {
+        Update update = new Update(tableName, update_value, condition);
+    }
+
+    public void insert(String path, String name, String[][] cols) {
+        InsertTable.insertRows(path, name, cols);
+    }
+
+    public void delete(String tableName, Object[] condition) {
+        Delete delete = new Delete(tableName,condition);
+    }
+
+    public void select(String path,String name,String [] cols,Object[][] condition) {
+        selectTable.selectCols(path,name,cols,condition);
     }
 }
