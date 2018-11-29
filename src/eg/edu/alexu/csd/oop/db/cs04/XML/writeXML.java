@@ -48,15 +48,18 @@ public class writeXML {
 //            transformer.transform(domSource, streamResult);
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+
+
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             DOMImplementation domImpl = document.getImplementation();
-
             DocumentType doctype = domImpl.createDocumentType("doctype","",
                     name+".dtd");
             transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
             transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+
+
             DOMSource source = new DOMSource(document);
             StreamResult result = new StreamResult(new File(path));
             transformer.transform(source, result);

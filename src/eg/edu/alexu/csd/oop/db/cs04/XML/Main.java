@@ -23,13 +23,12 @@ public class Main {
 
 //        int[][] xx = new int[3][2];
 //        xx[1]=null;
-//        xx[2]=null;
-
-        DTDGenerator dtdGenerator = new DTDGenerator();
-        dtdGenerator.getDTDTables("dbs\\db1\\t2.dtd");
-        for (String dtdTable : DTDGenerator.getDTDTables("dbs\\db1\\t2.dtd")) {
-            System.out.println(dtdTable);
-        }
-
+////        xx[2]=null;
+//        String[][] x = {{"column_name1", "column_name2", "column_name3"}, {"Integer", "String", "String"}};
+//        DTDGenerator.writeDTD("dbs\\db1\\t2.dtd","t2",x);
+//        System.out.println("113".compareTo("112"));
+        String[] c ={"column_name1","column_name2"};
+        Object[][] o = {{"column_name1","1"},{null,null},{null,null}};
+        selectTable.selectCols("dbs\\db1\\t2.xml","t2",c,o);
     }
 }

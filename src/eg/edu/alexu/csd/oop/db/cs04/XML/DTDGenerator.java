@@ -16,7 +16,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class DTDGenerator {
-    public static void writeDTD(String path, String name, String[] cols) {
+    public static void writeDTD(String path, String name, String[][] cols) {
         try {
             File ff = new File(path);
             System.out.println(ff.createNewFile());
@@ -25,16 +25,19 @@ public class DTDGenerator {
             fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
             fw.write("\t<!ELEMENT " + name + " (row)*>\n");
             fw.write("\t<!ELEMENT row (");
-            for (int i = 0; i < cols.length; i++) {
-                fw.write(cols[i]);
-                if (i + 1 < cols.length)
+            for (int i = 0; i < cols[0].length; i++) {
+                fw.write(cols[0][i]);
+                if (i + 1 < cols[0].length)
                     fw.write(",");
             }
             fw.write(")>\n");
-            for (int i = 0; i < cols.length; i++) {
+            for (int i = 0; i < cols[0].length; i++) {
                 fw.write("\t<!ELEMENT ");
-                fw.write(cols[i]);
+                fw.write(cols[0][i]);
                 fw.write(" (#PCDATA)>\n");
+                fw.write("\t<!ATTLIST ");
+                fw.write(cols[0][i]);
+                fw.write(" type CDATA #FIXED \""+cols[1][i]+"\">\n");
             }
             //close resources
             fw.close();
