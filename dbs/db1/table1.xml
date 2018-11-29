@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><table_name8>
 		
 	
@@ -6,4 +7,13 @@
 		<column_name2>2</column_name2>
 		<column_name3>value_4</column_name3>
 	</row>
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<table_name8>
+    <row>
+        <column_name1>value_2</column_name1>
+        <column_name2>2</column_name2>
+        <column_name3>value_4</column_name3>
+    </row>
+>>>>>>> branch 'master' of https://github.com/ahmedezeny/DBMS.git
 </table_name8>
