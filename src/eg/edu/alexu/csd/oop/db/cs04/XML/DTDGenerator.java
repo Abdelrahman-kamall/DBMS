@@ -51,8 +51,8 @@ public class DTDGenerator {
         String[] x = null;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
-            bufferedReader.readLine();
-            bufferedReader.readLine();
+            System.out.println(bufferedReader.readLine());
+            System.out.println(bufferedReader.readLine());
             String regex = "[\\(,\\)]";
             x = bufferedReader.readLine().split(regex);
             String[] cols = new String[x.length-2];

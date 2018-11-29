@@ -31,7 +31,12 @@ public class Main {
         String[] c ={"column_name2","column_name1"};
         Object[][] o = {{null,null},{"column_name1","5"},{null,null}};
         System.out.println(Arrays.deepToString(selectTable.selectCols("dbs\\db1\\t2.xml", "t2", c, o)));
-        Object[][] o1 = {{null,null},{"column_name1","5"},{null,null}};
-        Object[][] o2 = {{null,null},{"column_name1","5"},{null,null}};
+        String[][] o1 = {{"column_name1","column_name2"},{"what","dafuq"}};
+        String[][] o2 = {{null,null,null},{"what","the","fuck"}};
+        InsertTable.insertRows("dbs\\db1\\t2.xml","t2",o1);
+        String[][] input = {{"Name","Age"},{"String","int"}};
+        createTable.createTable(input,"test");
+        String[][] o1 = {{"column_name1","column_name2"},{"what","dafuq"}};
+        InsertTable.insertRows("dbs\\db1\\test.xml","test",o1);
     }
 }

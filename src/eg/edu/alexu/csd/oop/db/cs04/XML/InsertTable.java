@@ -1,13 +1,16 @@
 package eg.edu.alexu.csd.oop.db.cs04.XML;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.stream.events.DTD;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,7 +33,7 @@ int no=0;
                 for (int i = 0; i < columns.length; i++) {
                     if (Arrays.binarySearch(cols[0], columns[i]) >= 0) {
                         Element temp = doc.createElement(columns[i]);
-                        temp.setTextContent(cols[1][i]);
+                        temp.setTextContent(((String) cols[1][i]));
                         row.appendChild(temp);
                     } else {
                         Element temp = doc.createElement(columns[i]);
@@ -41,11 +44,35 @@ int no=0;
             } else {
                 for (int i = 0; i < columns.length; i++) {
                     Element temp = doc.createElement(columns[i]);
-                    temp.setTextContent(cols[1][i]);
+                    temp.setTextContent(((String) cols[1][i]));
                     row.appendChild(temp);
                 }
             }
             no=root.getElementsByTagName("row").getLength();
+
+
+
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            DOMImplementation domImpl = doc.getImplementation();
+            DocumentType doctype = domImpl.createDocumentType("doctype","",
+                    name+".dtd");
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+
+
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(path));
+            transformer.transform(source, result);
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

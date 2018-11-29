@@ -6,14 +6,9 @@ import java.io.IOException;
 
 public class createTable {
 
-    public static void createTable(String[][] input, String path){
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(path);
-//        sb.append(input[0]);
-//        sb.append(".txt");
-//        path = sb.toString();
-        writeXML.writeXML("dbs\\db1\\t2.dtd","t2");
-        DTDGenerator.writeDTD("dbs\\db1\\t2.dtd","t2",input);
+    public static void createTable(String[][] input, String name){
+        writeXML.writeXML("dbs\\db1\\" + name +".xml",name);
+        DTDGenerator.writeDTD("dbs\\db1\\" + name +".dtd",name,input);
     }
 
 }

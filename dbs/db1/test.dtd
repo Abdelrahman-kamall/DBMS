@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!ELEMENT test (row)*>
+	<!ELEMENT row (Name,Age)>
+	<!ELEMENT Name (#PCDATA)>
+	<!ATTLIST Name type CDATA #FIXED "String">
+	<!ELEMENT Age (#PCDATA)>
+	<!ATTLIST Age type CDATA #FIXED "int">

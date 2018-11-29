@@ -3,17 +3,33 @@
 <t2>
     <row>
         <column_name1 type="Integer">5</column_name1>
-        <column_name2>2</column_name2>
-        <column_name3>lololo</column_name3>
+        <column_name2 type="String">2</column_name2>
+        <column_name3 type="String">lololo</column_name3>
     </row>
     <row>
         <column_name1 type="Integer">10</column_name1>
-        <column_name2>2</column_name2>
-        <column_name3>lololo</column_name3>
+        <column_name2 type="String">2</column_name2>
+        <column_name3 type="String">lololo</column_name3>
     </row>
     <row>
         <column_name1 type="Integer">15</column_name1>
-        <column_name2>2</column_name2>
-        <column_name3>lololo</column_name3>
+        <column_name2 type="String">2</column_name2>
+        <column_name3 type="String">lololo</column_name3>
     </row>
+
+<row>
+<column_name1 type="Integer">what</column_name1>
+<column_name2 type="String">dafuq</column_name2>
+<column_name3 type="String"/>
+</row>
+<row>
+<column_name1 type="Integer">what</column_name1>
+<column_name2 type="String">dafuq</column_name2>
+<column_name3 type="String"/>
+</row>
+<row>
+<column_name1 type="Integer">what</column_name1>
+<column_name2 type="String">dafuq</column_name2>
+<column_name3 type="String"/>
+</row>
 </t2>

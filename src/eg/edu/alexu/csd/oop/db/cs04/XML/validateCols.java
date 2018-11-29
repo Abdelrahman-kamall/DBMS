@@ -7,6 +7,7 @@ import java.util.List;
 public class validateCols {
     public static boolean validate(String[] given, String path) {
         DTDGenerator dtdGenerator = new DTDGenerator();
+        path = path.replace(".xml",".dtd");
         String[] standard = dtdGenerator.getDTDColumns(path);
         if (given.length <= standard.length) {
             List<String> temp = Arrays.asList(standard);
