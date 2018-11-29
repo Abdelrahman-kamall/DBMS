@@ -57,20 +57,26 @@ public class selectTable {
     private static void selectWithCondition(Node nNode, Element col, Object[][] condition, ArrayList<ArrayList<String>> table) {
         // TODO Auto-generated method stub
         // Check select's condition.
-        if(condition[0][0] != null) {
-            if (col.getElementsByTagName(condition[0][0].toString()).item(0).getTextContent()
-                    .equals(condition[0][1].toString())) {
+        if (condition[0][0] != null) {
+            String value = col.getElementsByTagName(condition[0][0].toString()).item(0).getTextContent();
+            String v2 = condition[0][1].toString();
+            System.out.println(value.compareTo(v2));
+            if (value.equals(v2)) {
                 // delete parent of col.
                 selectWithoutCondition(nNode, col, condition, table);
             }
-        }else if(condition[1][0] != null) {
-            if (col.getElementsByTagName(condition[1][0].toString()).item(0).getTextContent()
-                    .compareTo(condition[1][1].toString()) > 0) {
+        } else if (condition[1][0] != null) {
+            String value = col.getElementsByTagName(condition[1][0].toString()).item(0).getTextContent();
+            String v2 = condition[1][1].toString();
+            System.out.println(value.compareTo(v2));
+            if (value.compareTo(v2) > 0 || value.length()>v2.length()) {
                 selectWithoutCondition(nNode, col, condition, table);
             }
-        }else if(condition[2][0] != null) {
-            if (col.getElementsByTagName(condition[2][0].toString()).item(0).getTextContent()
-                    .compareTo(condition[2][1].toString()) < 0) {
+        } else if (condition[2][0] != null) {
+            String value = col.getElementsByTagName(condition[2][0].toString()).item(0).getTextContent();
+            String v2 = condition[2][1].toString();
+            System.out.println(value.compareTo(v2));
+            if (value.compareTo(v2) < 0 || value.length()<v2.length()) {
                 selectWithoutCondition(nNode, col, condition, table);
             }
         }

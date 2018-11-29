@@ -28,7 +28,7 @@ public class Main {
 //        DTDGenerator.writeDTD("dbs\\db1\\t2.dtd","t2",x);
 //        System.out.println("113".compareTo("112"));
         String[] c ={"column_name1","column_name2"};
-        Object[][] o = {{"column_name1","1"},{null,null},{null,null}};
+        Object[][] o = {{null,null},{"column_name1","5"},{null,null}};
         selectTable.selectCols("dbs\\db1\\t2.xml","t2",c,o);
     }
 }

@@ -2,17 +2,17 @@
 <!DOCTYPE t2 PUBLIC "" "t2.dtd">
 <t2>
     <row>
-        <column_name1 type="Integer">1</column_name1>
+        <column_name1 type="Integer">5</column_name1>
         <column_name2>2</column_name2>
         <column_name3>lololo</column_name3>
     </row>
     <row>
-        <column_name1 type="Integer">1</column_name1>
+        <column_name1 type="Integer">10</column_name1>
         <column_name2>2</column_name2>
         <column_name3>lololo</column_name3>
     </row>
     <row>
-        <column_name1 type="Integer">2</column_name1>
+        <column_name1 type="Integer">15</column_name1>
         <column_name2>2</column_name2>
         <column_name3>lololo</column_name3>
     </row>
