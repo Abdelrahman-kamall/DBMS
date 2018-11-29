@@ -31,5 +31,7 @@ public class Main {
         String[] c ={"column_name2","column_name1"};
         Object[][] o = {{null,null},{"column_name1","5"},{null,null}};
         System.out.println(Arrays.deepToString(selectTable.selectCols("dbs\\db1\\t2.xml", "t2", c, o)));
+        Object[][] o1 = {{null,null},{"column_name1","5"},{null,null}};
+        Object[][] o2 = {{null,null},{"column_name1","5"},{null,null}};
     }
 }
