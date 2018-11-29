@@ -2,16 +2,17 @@ package eg.edu.alexu.csd.oop.db.cs04.XML;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class validateCols {
     public static boolean validate(String[] given, String path) {
         DTDGenerator dtdGenerator = new DTDGenerator();
-        String[] standard = dtdGenerator.getDTDTables(path);
+        String[] standard = dtdGenerator.getDTDColumns(path);
         if (given.length <= standard.length) {
-            ArrayList<String> temp = (ArrayList<String>) Arrays.asList(given);
+            List<String> temp = Arrays.asList(standard);
             for (int i = 0; i < given.length; i++) {
-                if (temp.remove(given[i])) {
-
+                if (temp.indexOf(given[i])>=0) {
+                    System.out.println("Valid");
                 } else {
                     return false;
                 }

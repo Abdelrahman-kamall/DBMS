@@ -47,7 +47,7 @@ public class DTDGenerator {
         }
     }
 
-    public static String[] getDTDTables(String path) {
+    public static String[] getDTDColumns(String path) {
         String[] x = null;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
