@@ -6,7 +6,8 @@ public class Main {
 		// Object[][] x = { { "column_name1", "column_name2", "column_name3" }, {
 		// "11111111", 22222222, "33333333" } };
 
-		Object[][] cond = { { "0", "0" }, { "0", "0" }, { "column_name3", 5 } };
+		Object[][] cond = { { "column_name3", "value_3" }, { "0", "0" }, { "0", "0" } };
 		Delete up = new Delete("table1", cond);
+		System.out.print(up.getcount());
 	}
 }

@@ -51,7 +51,25 @@ public class Update {
 					Element col = (Element) nNode;
 
 					if (condition != null) {
-						updateWithCondition(col);
+						String colName = "";
+						boolean f = false;
+						for (int j = 0; j < condition.length; j++) {
+							if (!condition[j][0].equals("0")) {
+								colName = condition[j][0].toString();
+							}
+						}
+						NodeList cols = col.getChildNodes();
+						for (int j = 0; j < cols.getLength(); j++) {
+							if (cols.item(j).getNodeName().equals(colName)) {
+								break;
+							}
+							if (j == cols.getLength() - 1) {
+								f = true;
+							}
+						}
+						if (!f) {
+							updateWithCondition(col);
+						}
 					} else {
 						updateWithoutCondition(col);
 					}
@@ -98,11 +116,6 @@ public class Update {
 					.equals(condition[0][1].toString())) {
 				// Loop over cols to update.
 				updateWithoutCondition(col);
-				/*
-				 * for (int j = 0; j < update_value[0].length; j++) { // Update cols.
-				 * col.getElementsByTagName(update_value[0][j].toString()).item(0)
-				 * .setTextContent(update_value[1][j].toString()); }
-				 */
 			}
 		} else if (!condition[1][0].equals("0")) {
 			if (col.getElementsByTagName(condition[1][0].toString()).item(0).getTextContent()
