@@ -21,9 +21,9 @@ import org.xml.sax.SAXException;
 public class Delete {
 
 	private String tableName;
-	private Object[] condition;
+	private Object[][] condition;
 
-	public Delete(String tableName, Object[] condition) {
+	public Delete(String tableName, Object[][] condition) {
 		this.tableName = tableName;
 		this.condition = condition;
 		delete();
@@ -88,10 +88,27 @@ public class Delete {
 	private void deleteWithCondition(Node nNode, Element col) {
 		// TODO Auto-generated method stub
 		// Check delete's condition.
-		if (col.getElementsByTagName(condition[0].toString()).item(0).getTextContent()
-				.equals(condition[1].toString())) {
-			// delete parent of col.
-			nNode.getParentNode().removeChild(col);
+		if (!condition[0][0].equals("0")) {
+			if (col.getElementsByTagName(condition[0][0].toString()).item(0).getTextContent()
+					.equals(condition[0][1].toString())) {
+				// delete parent of col.
+				deleteWithoutCondition(nNode, col);
+			}
+		} else if (!condition[1][0].equals("0")) {
+			if (col.getElementsByTagName(condition[1][0].toString()).item(0).getTextContent()
+					.compareTo(condition[1][1].toString()) > 0) {
+				// delete parent of col.
+				deleteWithoutCondition(nNode, col);
+			}
+		} else if (!condition[2][0].equals("0")) {
+			if (col.getElementsByTagName(condition[2][0].toString()).item(0).getTextContent()
+					.compareTo(condition[2][1].toString()) < 0) {
+				// delete parent of col.
+				deleteWithoutCondition(nNode, col);
+			}
+		} else {
+			deleteWithoutCondition(nNode, col);
 		}
+
 	}
 }

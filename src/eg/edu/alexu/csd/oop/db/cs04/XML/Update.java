@@ -21,9 +21,9 @@ public class Update {
 
 	private String tableName;
 	private Object[][] update_value;
-	private Object[] condition;
+	private Object[][] condition;
 
-	public Update(String tableName, Object[][] update_value, Object[] condition) {
+	public Update(String tableName, Object[][] update_value, Object[][] condition) {
 		this.tableName = tableName;
 		this.condition = condition;
 		this.update_value = update_value;
@@ -91,15 +91,35 @@ public class Update {
 
 	private void updateWithCondition(Element col) {
 		// TODO Auto-generated method stub
+
 		// Check update's condition.
-		if (col.getElementsByTagName(condition[0].toString()).item(0).getTextContent()
-				.equals(condition[1].toString())) {
-			// Loop over cols to update.
-			for (int j = 0; j < update_value[0].length; j++) {
-				// Update cols.
-				col.getElementsByTagName(update_value[0][j].toString()).item(0)
-						.setTextContent(update_value[1][j].toString());
+		if (!condition[0][0].equals("0")) {
+			if (col.getElementsByTagName(condition[0][0].toString()).item(0).getTextContent()
+					.equals(condition[0][1].toString())) {
+				// Loop over cols to update.
+				updateWithoutCondition(col);
+				/*
+				 * for (int j = 0; j < update_value[0].length; j++) { // Update cols.
+				 * col.getElementsByTagName(update_value[0][j].toString()).item(0)
+				 * .setTextContent(update_value[1][j].toString()); }
+				 */
 			}
+		} else if (!condition[1][0].equals("0")) {
+			if (col.getElementsByTagName(condition[1][0].toString()).item(0).getTextContent()
+					.compareTo(condition[1][1].toString()) > 0) {
+				// Loop over cols to update.
+				updateWithoutCondition(col);
+			}
+
+		} else if (!condition[2][0].equals("0")) {
+			if (col.getElementsByTagName(condition[2][0].toString()).item(0).getTextContent()
+					.compareTo(condition[2][1].toString()) < 0) {
+				// Loop over cols to update.
+				updateWithoutCondition(col);
+			}
+
+		} else {
+			updateWithoutCondition(col);
 		}
 	}
 }
