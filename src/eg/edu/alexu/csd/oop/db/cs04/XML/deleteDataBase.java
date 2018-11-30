@@ -1,25 +1,17 @@
 package eg.edu.alexu.csd.oop.db.cs04.XML;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Comparator;
 
-public class deleteDataBase {
+public class DeleteDataBase {
+    public static void deleteDirectoryStream(Path path) throws IOException {
+        Files.walk(path)
+                .sorted(Comparator.reverseOrder())
+                .map(Path::toFile)
+                .forEach(File::delete);
 
-	private File f;
-	private String dbName;
-
-	public deleteDataBase(String dbName) {
-		this.dbName = dbName;
-		f = new File(dbName);
-		deleteDirectory(f);
-	}
-
-	private boolean deleteDirectory(File directoryToBeDeleted) {
-		File[] allContents = directoryToBeDeleted.listFiles();
-		if (allContents != null) {
-			for (File file : allContents) {
-				deleteDirectory(file);
-			}
-		}
-		return directoryToBeDeleted.delete();
-	}
+    }
 }

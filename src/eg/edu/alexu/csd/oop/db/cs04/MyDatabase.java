@@ -17,6 +17,11 @@ public class MyDatabase implements Database {
 
     @Override
     public Object[][] executeQuery(String query) throws SQLException {
+        ValidationMethod2 v= new ValidationMethod2();
+        ParserMethode2 p= new ParserMethode2();
+        if(v.validateSelect(query)){
+            
+        }
         return new Object[0][];
     }
 
