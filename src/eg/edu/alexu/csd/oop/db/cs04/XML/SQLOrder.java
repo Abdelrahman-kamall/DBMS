@@ -29,23 +29,25 @@ public class SQLOrder {
 	}
 
 	public void createTable(String[][] input, String tablename) {
-		createTable.createTable(database,input, tablename);
+		createTable.createTable(database, input, tablename);
 	}
 
 	public void dropTable(String tablename) {
-		dropTable dropTable = new dropTable(database,tablename);
+		dropTable dropTable = new dropTable(database, tablename);
 	}
 
-	public void update(String tableName, Object[][] update_value, Object[][] condition) {
+	public int update(String tableName, Object[][] update_value, Object[][] condition) {
 		Update update = new Update(database, tableName, update_value, condition);
+		return update.getCount();
 	}
 
 	public void insert(String name, String[][] cols) {
 		InsertTable.insertRows(database, name, cols);
 	}
 
-	public void delete(String tableName, Object[][] condition) {
+	public int delete(String tableName, Object[][] condition) {
 		Delete delete = new Delete(database, tableName, condition);
+		return delete.getcount();
 	}
 
 	public void select(String name, String[] cols, Object[][] condition) {
