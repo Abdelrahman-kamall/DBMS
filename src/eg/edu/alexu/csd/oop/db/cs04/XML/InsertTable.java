@@ -13,6 +13,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class InsertTable {
     public static int insertRows(String path, String name, String[][] cols) {
@@ -31,11 +32,13 @@ public class InsertTable {
             Element root = doc.getDocumentElement();
             Element row = doc.createElement("row");
             root.appendChild(row);
-            if (cols[0].length < columns.length) {
+            if (cols[0].length <= columns.length) {
                 for (int i = 0; i < columns.length; i++) {
-                    if (Arrays.binarySearch(cols[0], columns[i]) >= 0) {
+                    List t = Arrays.asList(cols[0]);
+                    int index = t.indexOf(columns[i]);
+                    if (index >= 0) {
                         Element temp = doc.createElement(columns[i]);
-                        temp.setTextContent(((String) cols[1][i]));
+                        temp.setTextContent(((String) cols[1][index]));
                         row.appendChild(temp);
                     } else {
                         Element temp = doc.createElement(columns[i]);

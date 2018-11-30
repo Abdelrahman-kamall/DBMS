@@ -240,14 +240,14 @@ public class ParserMethod3 {
             conditions[1][1]=null;
             conditions[2][0]=null;
             conditions[2][1]=null;
-        }else if(operation.equals("<")) {
+        }else if(operation.equals(">")) {
             conditions[0][0] =null;
             conditions[0][1] =null;
             conditions[1][0]=colName.toLowerCase();
             conditions[1][1]=value;
             conditions[2][0]=null;
             conditions[2][1]=null;
-        }else if(operation.equals(">")) {
+        }else if(operation.equals("<")) {
             conditions[0][0] =null;
             conditions[0][1] =null;
             conditions[1][0]=null;
