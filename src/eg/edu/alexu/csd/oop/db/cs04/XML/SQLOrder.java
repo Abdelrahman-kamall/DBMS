@@ -41,8 +41,8 @@ public class SQLOrder {
 		return update.getCount();
 	}
 
-	public void insert(String name, String[][] cols) {
-		InsertTable.insertRows(database, name, cols);
+	public int insert(String name, String[][] cols) {
+		return InsertTable.insertRows(database, name, cols);
 	}
 
 	public int delete(String tableName, Object[][] condition) {
