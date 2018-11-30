@@ -16,7 +16,7 @@ public class ValidationMethod3 {
     }
 
     private String InsertDRegex(String s) {
-        String[] lines = s.split("VALUES",Pattern.CASE_INSENSITIVE);
+        String[] lines = s.split("\\)");
         int first = numofcom(lines[0]);
         String insertD ="insert\\s+into\\s+(\\w+)\\s*";
         if(first !=0) {
