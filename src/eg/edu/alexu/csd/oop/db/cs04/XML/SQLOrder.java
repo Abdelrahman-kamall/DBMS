@@ -42,29 +42,50 @@ public class SQLOrder {
     }
 
     public boolean createTable(String[][] input, String tablename) {
-        return createTable.createTable(input, tablename,database);
+        if (database != null) {
+            return createTable.createTable(input, tablename,database);
+        }else {
+            return false;
+        }
+
     }
 
     public boolean dropTable(String tablename) {
-        dropTable dropTable = new dropTable(tablename,database);
-        return dropTable.isSuccess();
+        if (database != null) {
+            dropTable dropTable = new dropTable(tablename, database);
+            return dropTable.isSuccess();
+        }else {
+            return false;
+        }
     }
 
     public int update(String tableName, Object[][] update_value, Object[][] condition) {
-        Update update = new Update(tableName, update_value, condition,database);
-        return update.getCount();
+        if(database!=null) {
+            Update update = new Update(tableName, update_value, condition, database);
+            return update.getCount();
+        }else {
+            return 0;
+        }
     }
 
     public int insert(String name, String[][] cols) {
+        if(database!=null)
         return InsertTable.insertRows(database+"\\"+name+".xml", name, cols);
+        else return 0;
     }
 
     public int delete(String tableName, Object[][] condition) {
-        Delete delete = new Delete(tableName, condition,database);
-        return delete.getcount();
+        if(database!=null) {
+            Delete delete = new Delete(tableName, condition, database);
+            return delete.getcount();
+        }else {
+            return 0;
+        }
     }
 
     public Object[][] select(String name, String[] cols, Object[][] condition) {
+        if(database!=null)
         return selectTable.selectCols(database+"\\"+name+".xml", name, cols, condition);
+        else return null;
     }
 }

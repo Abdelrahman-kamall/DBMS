@@ -180,15 +180,26 @@ public class ParserMethod3 {
 		s1 = matcher.group(0);
 	}
 	*/
-        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?\\s*;?\\s*";
+        String s1 = s.toLowerCase();
+        if(s1.contains("where")) {
+            regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
+            }else {
+            	
+            }
         return regex;
     }
 
 
 
     public int DeleteD(String query) {
-
-        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?\\s+(where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?;?\\s*";
+    	
+        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?";
+        String s1 = query.toLowerCase();
+        if(s1.contains("where")) {
+        	deleteD+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
+            }else {
+            	
+            }
         Pattern pattern3 = Pattern.compile(deleteD, Pattern.CASE_INSENSITIVE);
         Matcher matcher3 = pattern3.matcher(query);
         matcher3.find();

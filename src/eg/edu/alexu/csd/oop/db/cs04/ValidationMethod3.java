@@ -117,8 +117,12 @@ public class ValidationMethod3 {
 			s1 = matcher.group(0);
 		}
 		*/
-        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?\\s*;?\\s*";
-        
+        String s1 = s.toLowerCase();
+        if(s1.contains("where")) {
+        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
+        }else {
+        	
+        }
         return regex;
     }
 

@@ -55,7 +55,7 @@ public class Delete {
 						String colName = "";
 						boolean f = false;
 						for (int j = 0; j < condition.length; j++) {
-							if (!condition[j][0].equals("0")) {
+							if (condition[j][0]!=null) {
 								colName = condition[j][0].toString();
 							}
 						}
