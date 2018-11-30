@@ -1,3 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE table_name2 PUBLIC "" "table_name2.dtd">
-<table_name2/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><table_name2>
+
+
+<row>
+<column_name1 type="varchar">value2</column_name1>
+<column_name2 type="int">value4</column_name2>
+<column_name3 type="varchar">6</column_name3>
+</row>
+
+
+<row>
+<column_name1 type="varchar">value2</column_name1>
+<column_name2 type="int">value4</column_name2>
+<column_name3 type="varchar">6</column_name3>
+</row>
+
+
+<row>
+<column_name1 type="varchar">value2</column_name1>
+<column_name2 type="int">value4</column_name2>
+<column_name3 type="varchar">6</column_name3>
+</row>
+</table_name2>

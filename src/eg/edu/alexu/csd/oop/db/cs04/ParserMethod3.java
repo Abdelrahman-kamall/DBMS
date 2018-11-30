@@ -15,7 +15,7 @@ public class ParserMethod3 {
         matcher1.find();
         String tableName = matcher1.group(1);
 
-        String[] lines = query.split("VALUES",Pattern.CASE_INSENSITIVE);
+        String[] lines = query.split("\\)");
         int first = numofcom(lines[0])+1;
         int second =numofcom(lines[1])+1;
         String[][] elements = new String[2][second];
@@ -43,7 +43,7 @@ public class ParserMethod3 {
     }
 
     private String InsertDRegex(String s) {
-        String[] lines = s.split("VALUES",Pattern.CASE_INSENSITIVE);
+        String[] lines = s.split("\\)");
         int first = numofcom(lines[0]);
         String insertD ="insert\\s+into\\s+(\\w+)\\s*";
         if(first !=0) {
@@ -56,11 +56,15 @@ public class ParserMethod3 {
             insertD+="\\s*\\)\\s*";
         }
         insertD+="VALUES\\s*\\(\\s*'?\"?(.*[^'\";\\s])'?\"?";
+        if(lines.length>1) {
         int second =numofcom(lines[1]);
         for(int counter =0;counter <second ;counter++) {
             insertD+="\\s*,\\s*'?\"?(.*[^'\";\\s])'?\"?";
         }
         insertD+="\\s*\\)\\s*;?\\s*";
+        }
+        
+        
 
         return insertD;
 
@@ -176,15 +180,26 @@ public class ParserMethod3 {
 		s1 = matcher.group(0);
 	}
 	*/
-        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?\\s*;?\\s*";
+        String s1 = s.toLowerCase();
+        if(s1.contains("where")) {
+            regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
+            }else {
+            	
+            }
         return regex;
     }
 
 
 
     public int DeleteD(String query) {
-
-        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?\\s+(where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?;?\\s*";
+    	
+        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?";
+        String s1 = query.toLowerCase();
+        if(s1.contains("where")) {
+        	deleteD+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
+            }else {
+            	
+            }
         Pattern pattern3 = Pattern.compile(deleteD, Pattern.CASE_INSENSITIVE);
         Matcher matcher3 = pattern3.matcher(query);
         matcher3.find();

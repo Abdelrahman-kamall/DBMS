@@ -33,6 +33,7 @@ public class MyDatabase implements Database {
 
     @Override
     public boolean executeStructureQuery(String query) throws SQLException {
+    	query=query.toLowerCase();
 		ValidationMethod1 v = new ValidationMethod1();
 		ParserMethod1 p =new ParserMethod1();
 		if (v.CreateDB(query)) {
@@ -54,6 +55,7 @@ public class MyDatabase implements Database {
 
     @Override
     public Object[][] executeQuery(String query) throws SQLException {
+    	query=query.toLowerCase();
         ValidationMethod2 v= new ValidationMethod2();
         ParserMethod2 p = new ParserMethod2();
         if (v.validateSelect(query)){
@@ -64,18 +66,25 @@ public class MyDatabase implements Database {
 
     @Override
     public int executeUpdateQuery(String query) throws SQLException {
-
+    	query=query.toLowerCase();
         ValidationMethod3 val3= new ValidationMethod3();
         ParserMethod3 par3 = new ParserMethod3();
         int rowsnum =0;
+        boolean flag = false;
         if(val3.InsertD(query)) {
             rowsnum=par3.InsertD(query);
+            flag=true;
         }
         if(val3.UpdateD(query)) {
             rowsnum=par3.UpdateD(query);
+            flag=true;
         }
         if(val3.DeleteD(query)) {
             rowsnum=par3.DeleteD(query);
+            flag=true;
+        }
+        if(!flag) {
+        	throw new SQLException();
         }
        
         return rowsnum;

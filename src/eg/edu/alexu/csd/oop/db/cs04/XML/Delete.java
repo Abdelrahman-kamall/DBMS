@@ -55,7 +55,7 @@ public class Delete {
 						String colName = "";
 						boolean f = false;
 						for (int j = 0; j < condition.length; j++) {
-							if (!condition[j][0].equals("0")) {
+							if (condition[j][0]!=null) {
 								colName = condition[j][0].toString();
 							}
 						}
@@ -111,7 +111,7 @@ public class Delete {
 	private boolean deleteWithCondition(Node nNode, Element col) {
 		// TODO Auto-generated method stub
 		// Check delete's condition.
-		if (!condition[0][0].equals("0")) {
+		if (condition[0][0]!=null) {
 			NodeList cols = col.getChildNodes();
 			for (int j = 0; j < cols.getLength(); j++) {
 				if (cols.item(j).getNodeName().equals(condition[0][0].toString())) {
@@ -126,7 +126,7 @@ public class Delete {
 				// delete parent of col.
 				return deleteWithoutCondition(nNode, col);
 			}
-		} else if (!condition[1][0].equals("0")) {
+		} else if (condition[1][0]!=null) {
 			NodeList cols = col.getChildNodes();
 			for (int j = 0; j < cols.getLength(); j++) {
 				if (cols.item(j).getNodeName().equals(condition[1][0].toString())) {
@@ -141,7 +141,7 @@ public class Delete {
 				// delete parent of col.
 				return deleteWithoutCondition(nNode, col);
 			}
-		} else if (!condition[2][0].equals("0")) {
+		} else if (condition[2][0]!=null) {
 			NodeList cols = col.getChildNodes();
 			for (int j = 0; j < cols.getLength(); j++) {
 				if (cols.item(j).getNodeName().equals(condition[2][0].toString())) {
