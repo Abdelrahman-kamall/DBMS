@@ -17,13 +17,15 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class Delete {
+	private String database;
 	private String tableName;
 	private Object[][] condition;
 	private int count = 0;
 
-	public Delete(String tableName, Object[][] condition) {
+	public Delete(String database, String tableName, Object[][] condition) {
 		this.tableName = tableName;
 		this.condition = condition;
+		this.database = database;
 		count = delete();
 	}
 
@@ -31,7 +33,7 @@ public class Delete {
 		// TODO Auto-generated method stub
 		int counter = 0;
 		try {
-			String filepath = "dbs\\db1\\" + tableName + ".xml";
+			String filepath = "dbs\\" + database + "\\" + tableName + ".xml";
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(filepath);

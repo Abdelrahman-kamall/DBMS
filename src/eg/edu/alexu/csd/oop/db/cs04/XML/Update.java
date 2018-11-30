@@ -17,11 +17,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class Update {
+	private String database;
 	private String tableName;
 	private Object[][] update_value;
 	private Object[][] condition;
 
-	public Update(String tableName, Object[][] update_value, Object[][] condition) {
+	public Update(String database, String tableName, Object[][] update_value, Object[][] condition) {
+		this.database = database;
 		this.tableName = tableName;
 		this.condition = condition;
 		this.update_value = update_value;
@@ -30,7 +32,7 @@ public class Update {
 
 	private void update() {
 		try {
-			String filepath = "dbs\\db1\\" + tableName + ".xml";
+			String filepath = "dbs\\" + database + "\\" + tableName + ".xml";
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(filepath);

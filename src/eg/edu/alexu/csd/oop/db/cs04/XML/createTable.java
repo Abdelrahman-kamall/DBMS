@@ -6,9 +6,9 @@ import java.io.IOException;
 
 public class createTable {
 
-    public static void createTable(String[][] input, String name){
-        writeXML.writeXML("dbs\\db1\\" + name +".xml",name);
-        DTDGenerator.writeDTD("dbs\\db1\\" + name +".dtd",name,input);
-    }
+	public static void createTable(String database, String[][] input, String name) {
+		writeXML.writeXML("dbs\\" + database + "\\" + name + ".xml", name);
+		DTDGenerator.writeDTD("dbs\\" + database + "\\" + name + ".dtd", name, input);
+	}
 
 }
