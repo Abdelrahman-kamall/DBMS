@@ -61,22 +61,37 @@ public class ParserMethod1 {
     }
 
     private String CreateTableRegex(String s) {
-
+    	int numofcom = numofcom(s);
     	String createT = "\\s*create\\s+table\\s+(\\w+)\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
         Pattern pattern1 = Pattern.compile(createT,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(s);
         matcher.find();
         String regex = pattern1.toString();
         String s1 = matcher.group(0);
-        while (!s1.equals(s) && matcher.find()) {
+        
+        for(int counter=0;counter<numofcom;counter++) {
+        	regex += "\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
+        	table++;
+        }
+       /*while (!s1.equals(s) && matcher.find()) {
             regex += "\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
             pattern1 = Pattern.compile(regex);
             matcher = pattern1.matcher(s);
             matcher.find();
             s1 = matcher.group(0);
             table++;
-        }
+        }*/
         return regex;
+    }
+    
+    private int numofcom(String s) {
+        int num =0;
+        for(int counter =0 ; counter <s.length();counter++) {
+            if(s.charAt(counter) == ',') {
+                num++;
+            }
+        }
+        return num;
     }
 
 
