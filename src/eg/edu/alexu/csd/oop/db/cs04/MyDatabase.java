@@ -10,18 +10,17 @@ public class MyDatabase implements Database {
     public String createDatabase(String databaseName, boolean dropIfExists) {
 
         Character sp = System.getProperty("file.separator").charAt(0);
-        File file = new File("DataBases" + sp + databaseName);
+        File file = new File("dbs" + sp + databaseName);
         String path = file.getAbsolutePath();
-        String[] lines = databaseName.split(sp.toString());
-        String dbName = lines[lines.length-1];
+        
         try {
             if (dropIfExists) {
 
-                executeStructureQuery("DROP DATABASE " + dbName);
+                executeStructureQuery("DROP DATABASE " + databaseName);
 
             }
 
-            executeStructureQuery("CREATE DATABASE " + dbName);
+            executeStructureQuery("CREATE DATABASE " + databaseName);
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -78,7 +77,7 @@ public class MyDatabase implements Database {
         if(val3.DeleteD(query)) {
             rowsnum=par3.DeleteD(query);
         }
-        //return that int variable
+       
         return rowsnum;
     }
 }

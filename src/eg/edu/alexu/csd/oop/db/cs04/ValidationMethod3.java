@@ -29,12 +29,13 @@ public class ValidationMethod3 {
             insertD+="\\s*\\)\\s*";
         }
         insertD+="VALUES\\s*\\(\\s*'?\"?(.*[^'\";\\s])'?\"?";
+        if(lines.length>1) {
         int second =numofcom(lines[1]);
         for(int counter =0;counter <second ;counter++) {
             insertD+="\\s*,\\s*'?\"?(.*[^'\";\\s])'?\"?";
         }
-        insertD+="\\s*\\)\\s*;?";
-
+        insertD+="\\s*\\)\\s*;?\\s*";
+    }
         return insertD;
 
 		/*
@@ -116,13 +117,13 @@ public class ValidationMethod3 {
 			s1 = matcher.group(0);
 		}
 		*/
-        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?\\s*;?";
-        System.out.println(regex);
+        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?\\s*;?\\s*";
+        
         return regex;
     }
 
     public boolean DeleteD(String query) {
-        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?\\s+(where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?;?";
+        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?\\s+(where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?;?\\s*";
         Pattern pattern3 = Pattern.compile(deleteD, Pattern.CASE_INSENSITIVE);
         Matcher matcher3 = pattern3.matcher(query);
         if(matcher3.find()) {

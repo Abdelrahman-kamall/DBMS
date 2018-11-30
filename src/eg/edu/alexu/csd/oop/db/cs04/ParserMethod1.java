@@ -14,7 +14,7 @@ public class ParserMethod1 {
         Matcher matcher1 = pattern1.matcher(query);
         if (matcher1.find()) {
 
-            SQLOrder.getInstance().createDatabase(matcher1.group(1));
+            SQLOrder.getInstance().createDatabase(matcher1.group(1).toLowerCase());
             return true;
         }
         return false;
@@ -24,13 +24,13 @@ public class ParserMethod1 {
         Pattern pattern2 = Pattern.compile(this.CreateTableRegex(query), Pattern.CASE_INSENSITIVE);
         Matcher matcher2 = pattern2.matcher(query);
         if (matcher2.find()) {
-            String a[][] = new String[table ][2];
+            String a[][] = new String[2][table];
             for (int ii = 1; ii <= table; ii++) {
-                a[ii-1][0] = matcher2.group(ii + 2 * ii);
-                a[ii-1][1] = matcher2.group((ii + 2 * ii) + 1);
+                a[0][ii-1] = matcher2.group(ii + 2 * ii).toLowerCase();
+                a[1][ii-1] = matcher2.group((ii + 2 * ii) + 1);
             }
 
-            SQLOrder.getInstance().createTable(a,matcher2.group(1));
+            SQLOrder.getInstance().createTable(a,matcher2.group(1).toLowerCase());
             return true;
         }
         return false;
@@ -42,7 +42,7 @@ public class ParserMethod1 {
         Matcher matcher3 = pattern3.matcher(query);
         if (matcher3.find()) {
 
-            SQLOrder.getInstance().dropDatabase(matcher3.group(1));
+            SQLOrder.getInstance().dropDatabase(matcher3.group(1).toLowerCase());
             return true;
         }
         return false;
@@ -54,7 +54,7 @@ public class ParserMethod1 {
         Matcher matcher4 = pattern4.matcher(query);
         if (matcher4.find()) {
 
-            SQLOrder.getInstance().dropTable(matcher4.group(1));
+            SQLOrder.getInstance().dropTable(matcher4.group(1).toLowerCase());
             return true;
         }
         return false;
@@ -62,14 +62,14 @@ public class ParserMethod1 {
 
     private String CreateTableRegex(String s) {
 
-        String createT = "\\s*create\\s+table\\s+(\\w+)\\s+\\((\\s*(\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s?,?)?\\s+\\)?;?\\s*";
+    	String createT = "\\s*create\\s+table\\s+(\\w+)\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
         Pattern pattern1 = Pattern.compile(createT,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(s);
         matcher.find();
         String regex = pattern1.toString();
         String s1 = matcher.group(0);
         while (!s1.equals(s) && matcher.find()) {
-            regex += "(\\s*(\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s?,?)?\\s+\\)?;?\\s*";
+            regex += "\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
             pattern1 = Pattern.compile(regex);
             matcher = pattern1.matcher(s);
             matcher.find();

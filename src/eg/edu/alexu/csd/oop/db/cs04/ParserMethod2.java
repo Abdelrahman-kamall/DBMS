@@ -32,7 +32,7 @@ public class ParserMethod2 {
             makeNull(b);
             makeNull(a);
 
-            return SQLOrder.getInstance().select(matcher.group(1),a,b);
+            return SQLOrder.getInstance().select(matcher.group(1).toLowerCase(),a,b);
             //selectTable.selectCols()
             //return callMethod(matcher.group(1),null,null);
         }if (!compeleteRegex(query,simpleRegex)){
@@ -40,7 +40,7 @@ public class ParserMethod2 {
             matcher = pattern1.matcher(query);
             if(matcher.find()&&compeleteRegex(query,createComRegex(query))){
 
-                return SQLOrder.getInstance().select(fillArray(matcher,a),a,b);
+                return SQLOrder.getInstance().select(fillArray(matcher,a).toLowerCase(),a,b);
             }
         }if(!compeleteRegex(query,createComRegex(query))){
             pattern1 = Pattern.compile(createVeryComRegex(query),CASE_INSENSITIVE);
@@ -51,7 +51,7 @@ public class ParserMethod2 {
 
                 afterWhere(matcher);
 
-                return SQLOrder.getInstance().select(fillArray(matcher,a),a,afterWhere(matcher));
+                return SQLOrder.getInstance().select(fillArray(matcher,a).toLowerCase(),a,afterWhere(matcher));
 
             }
         }
@@ -62,7 +62,7 @@ public class ParserMethod2 {
     private String fillArray(Matcher matcher, Object[] a) {
         int i;
         for (i=0;i<n;i++){
-            a[i]=matcher.group(i+1);
+            a[i]=matcher.group(i+1).toLowerCase();
         }
         return matcher.group(i+1);
     }
@@ -139,21 +139,21 @@ public class ParserMethod2 {
         Object[][] a=new Object[2][3];
         String s=  matcher.group(n + 3);
         if(s.equals("=")){
-            a[0][0]=matcher.group(n+2);
+            a[0][0]=matcher.group(n+2).toLowerCase();
             a[1][0]=matcher.group(n+4);
             a[0][1]=null;
             a[0][2]=null;
             a[1][1]=null;
             a[1][2]=null;
         }else if(s.equals("<")){
-            a[0][1]=matcher.group(n+2);
+            a[0][1]=matcher.group(n+2).toLowerCase();
             a[1][1]=matcher.group(n+4);
             a[0][0]=null;
             a[0][2]=null;
             a[1][0]=null;
             a[1][2]=null;
         }else if(s.equals(">")){
-            a[0][2]=matcher.group(n+2);
+            a[0][2]=matcher.group(n+2).toLowerCase();
             a[1][2]=matcher.group(n+4);
             a[0][1]=null;
             a[0][0]=null;

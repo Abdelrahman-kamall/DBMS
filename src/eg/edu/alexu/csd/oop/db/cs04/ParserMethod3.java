@@ -25,11 +25,11 @@ public class ParserMethod3 {
             m++;
         }
         for(int counter =1 ; counter <= first ; counter++) {
-            elements[0][counter-1] = matcher1.group(counter+1);
+            elements[0][counter-1] = matcher1.group(counter+1).toLowerCase();
         }
 
         int num =
-        SQLOrder.getInstance().insert(tableName,elements);
+        SQLOrder.getInstance().insert(tableName.toLowerCase(),elements);
 
 		/*System.out.println(tableName);
 		for(int counter =0;counter<2;counter++) {
@@ -60,7 +60,7 @@ public class ParserMethod3 {
         for(int counter =0;counter <second ;counter++) {
             insertD+="\\s*,\\s*'?\"?(.*[^'\";\\s])'?\"?";
         }
-        insertD+="\\s*\\)\\s*;?";
+        insertD+="\\s*\\)\\s*;?\\s*";
 
         return insertD;
 
@@ -121,7 +121,7 @@ public class ParserMethod3 {
         int numofcom = numofcom(query)+1;
         Object[][] arr = new Object[2][numofcom];
         for(int counter=1;counter<=numofcom;counter++) {
-            arr[0][counter-1]=matcher2.group(counter*2);
+            arr[0][counter-1]=matcher2.group(counter*2).toLowerCase();
             arr[1][counter-1]=matcher2.group(counter*2+1);
         }
 
@@ -133,7 +133,7 @@ public class ParserMethod3 {
             conditions=decideCond(matcher2.group((numofcom+1)*2+1),matcher2.group((numofcom+1)*2+2),matcher2.group((numofcom+1)*2+3));
         }
         int num =
-        SQLOrder.getInstance().update(tableName,arr,conditions);
+        SQLOrder.getInstance().update(tableName.toLowerCase(),arr,conditions);
         // call update method with params
 
 		/*System.out.println(tableName);
@@ -176,7 +176,7 @@ public class ParserMethod3 {
 		s1 = matcher.group(0);
 	}
 	*/
-        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?\\s*;?";
+        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?\\s*;?\\s*";
         return regex;
     }
 
@@ -184,7 +184,7 @@ public class ParserMethod3 {
 
     public int DeleteD(String query) {
 
-        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?\\s+(where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?;?";
+        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?\\s+(where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)?;?\\s*";
         Pattern pattern3 = Pattern.compile(deleteD, Pattern.CASE_INSENSITIVE);
         Matcher matcher3 = pattern3.matcher(query);
         matcher3.find();
@@ -210,7 +210,7 @@ public class ParserMethod3 {
 		}
 		*/
         int num =
-        SQLOrder.getInstance().delete(tableName,conditions);
+        SQLOrder.getInstance().delete(tableName.toLowerCase(),conditions);
         //call delete method with params
         return num;
     }
@@ -219,7 +219,7 @@ public class ParserMethod3 {
         Object[][] conditions = new Object[3][2];
 
         if(operation.equals("=")) {
-            conditions[0][0] =colName;
+            conditions[0][0] =colName.toLowerCase();
             conditions[0][1] =value;
             conditions[1][0]=null;
             conditions[1][1]=null;
@@ -228,7 +228,7 @@ public class ParserMethod3 {
         }else if(operation.equals("<")) {
             conditions[0][0] =null;
             conditions[0][1] =null;
-            conditions[1][0]=colName;
+            conditions[1][0]=colName.toLowerCase();
             conditions[1][1]=value;
             conditions[2][0]=null;
             conditions[2][1]=null;
@@ -237,7 +237,7 @@ public class ParserMethod3 {
             conditions[0][1] =null;
             conditions[1][0]=null;
             conditions[1][1]=null;
-            conditions[2][0]=colName;
+            conditions[2][0]=colName.toLowerCase();
             conditions[2][1]=value;
         }
         return conditions;

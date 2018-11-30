@@ -22,14 +22,18 @@ public class SQLOrder {
         stringBuilder.append("dbs\\");
         stringBuilder.append(database);
         this.database = stringBuilder.toString();
-        createDataBase createDataBase = new createDataBase(database);
+        createDataBase createDataBase = new createDataBase(this.database);
         return createDataBase.isSuccess();
     }
 
     public boolean dropDatabase(String database) {
         try {
+        	StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("dbs\\");
+            stringBuilder.append(database);
+            database=stringBuilder.toString();
             deleteDataBase.deleteDirectoryStream(Paths.get(database));
-            database = null;
+            this.database = null;
             return true;
         } catch (IOException e) {
             e.printStackTrace();

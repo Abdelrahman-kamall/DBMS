@@ -14,6 +14,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DTDGenerator {
     public static void writeDTD(String path, String name, String[][] cols) {
@@ -65,6 +67,38 @@ public class DTDGenerator {
             e.printStackTrace();
         }
         return x;
+    }
+
+    public static String[][] getDTDdatatypes(String path) {
+        String[] x = null;
+        try {
+            String p = path.replace(".xml",".dtd");
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(p)));
+            System.out.println(bufferedReader.readLine());
+            System.out.println(bufferedReader.readLine());
+            System.out.println(bufferedReader.readLine());
+            System.out.println(bufferedReader.readLine());
+            String regex = "[\"]";
+            List<List<String>> colstypes = new ArrayList<>();
+            colstypes.add(Arrays.asList(getDTDColumns(p)));
+            String[] types = new String[colstypes.get(0).size()];
+            for (int i=0;i<colstypes.get(0).size();i++) {
+                x = bufferedReader.readLine().split(regex);
+                types[i] = x[1];
+                bufferedReader.readLine();
+            }
+            colstypes.add(Arrays.asList(types));
+            String[][] array = new String[colstypes.size()][];
+            for (int i = 0; i < colstypes.size(); i++) {
+                List<String> row = colstypes.get(i);
+                array[i] = row.toArray(new String[row.size()]);
+            }
+            return array;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
 }

@@ -9,19 +9,21 @@ public class ValidationMethod1 {
 
     private String CreateTableRegex(String s) {
 
-        String createT = "\\s*create\\s+table\\s+(\\w+)\\s+\\((\\s*(\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s?,?)?\\s+\\)?;?\\s*";
+        String createT = "\\s*create\\s+table\\s+(\\w+)\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
         Pattern pattern1 = Pattern.compile(createT,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(s);
-        matcher.find();
+        
         String regex = pattern1.toString();
+        if(matcher.find()) {
         String s1 = matcher.group(0);
         while (!s1.equals(s) && matcher.find()) {
-            regex += "(\\s*(\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s?,?)?\\s+\\)?;?\\s*";
+            regex += "\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
             pattern1 = Pattern.compile(regex);
             matcher = pattern1.matcher(s);
             matcher.find();
             s1 = matcher.group(0);
             table++;
+        }
         }
         return regex;
     }
