@@ -14,10 +14,18 @@ public class ParserMethod3 {
         Matcher matcher1 = pattern1.matcher(query);
         matcher1.find();
         String tableName = matcher1.group(1);
-
+        
         String[] lines = query.split("\\)");
         int first = numofcom(lines[0])+1;
-        int second =numofcom(lines[1])+1;
+        int second =0;
+
+        if(lines.length<2) {
+        	second = first;
+        	first=0;
+        }else {
+        	second = numofcom(lines[1])+1;
+        }
+        
         String[][] elements = new String[2][second];
         int m = 0;
         for(int counter =second ; counter >= 1 ; counter--) {
@@ -45,6 +53,14 @@ public class ParserMethod3 {
     private String InsertDRegex(String s) {
         String[] lines = s.split("\\)");
         int first = numofcom(lines[0]);
+        int second =0;
+
+        if(lines.length<2) {
+        	second = first;
+        	first=0;
+        }else {
+        	second = numofcom(lines[1]);
+        }
         String insertD ="insert\\s+into\\s+(\\w+)\\s*";
         if(first !=0) {
             insertD+="\\(\\s*(\\w+)\\s*";
@@ -56,13 +72,11 @@ public class ParserMethod3 {
             insertD+="\\s*\\)\\s*";
         }
         insertD+="VALUES\\s*\\(\\s*'?\"?(.*[^'\";\\s])'?\"?";
-        if(lines.length>1) {
-        int second =numofcom(lines[1]);
+        
         for(int counter =0;counter <second ;counter++) {
             insertD+="\\s*,\\s*'?\"?(.*[^'\";\\s])'?\"?";
         }
         insertD+="\\s*\\)\\s*;?\\s*";
-        }
         
         
 
@@ -240,14 +254,14 @@ public class ParserMethod3 {
             conditions[1][1]=null;
             conditions[2][0]=null;
             conditions[2][1]=null;
-        }else if(operation.equals("<")) {
+        }else if(operation.equals(">")) {
             conditions[0][0] =null;
             conditions[0][1] =null;
             conditions[1][0]=colName.toLowerCase();
             conditions[1][1]=value;
             conditions[2][0]=null;
             conditions[2][1]=null;
-        }else if(operation.equals(">")) {
+        }else if(operation.equals("<")) {
             conditions[0][0] =null;
             conditions[0][1] =null;
             conditions[1][0]=null;

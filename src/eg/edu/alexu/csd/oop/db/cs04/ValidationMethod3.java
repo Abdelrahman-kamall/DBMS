@@ -18,6 +18,15 @@ public class ValidationMethod3 {
     private String InsertDRegex(String s) {
         String[] lines = s.split("\\)");
         int first = numofcom(lines[0]);
+        int second =0;
+
+        if(lines.length<2) {
+        	second = first;
+        	first=0;
+        }else {
+        	second = numofcom(lines[1]);
+        	
+        }
         String insertD ="insert\\s+into\\s+(\\w+)\\s*";
         if(first !=0) {
             insertD+="\\(\\s*(\\w+)\\s*";
@@ -28,14 +37,13 @@ public class ValidationMethod3 {
         if(first !=0) {
             insertD+="\\s*\\)\\s*";
         }
-        insertD+="VALUES\\s*\\(\\s*'?\"?(.*[^'\";\\s])'?\"?";
-        if(lines.length>1) {
-        int second =numofcom(lines[1]);
+        insertD+="VALUES\\s*\\(\\s*'?\"?(.*[^'\";\\s])'?\"?"; 
+        
         for(int counter =0;counter <second ;counter++) {
             insertD+="\\s*,\\s*'?\"?(.*[^'\";\\s])'?\"?";
         }
         insertD+="\\s*\\)\\s*;?\\s*";
-    }
+    
         return insertD;
 
 		/*
