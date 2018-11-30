@@ -16,39 +16,51 @@ public class SQLOrder {
         return instance;
     }
 
-    public void createDatabase(String database) {
+    public boolean createDatabase(String database) {
         this.database = database;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("dbs\\");
+        stringBuilder.append(database);
+        this.database = stringBuilder.toString();
+        createDataBase createDataBase = new createDataBase(database);
+        return createDataBase.isSuccess();
     }
 
-    public void dropDatabase(String database) {
+    public boolean dropDatabase(String database) {
         try {
-            DeleteDataBase.deleteDirectoryStream(Paths.get(database));
+            deleteDataBase.deleteDirectoryStream(Paths.get(database));
+            database = null;
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void createTable(String[][] input, String tablename) {
-        createTable.createTable(input, tablename);
+    public boolean createTable(String[][] input, String tablename) {
+        return createTable.createTable(input, tablename,database);
     }
 
-    public void dropTable(String tablename) {
-        dropTable dropTable = new dropTable(tablename);
+    public boolean dropTable(String tablename) {
+        dropTable dropTable = new dropTable(tablename,database);
+        return dropTable.isSuccess();
     }
 
-    public void update(String tableName, Object[][] update_value, Object[] condition) {
-        Update update = new Update(tableName, update_value, condition);
+    public int update(String tableName, Object[][] update_value, Object[][] condition) {
+        Update update = new Update(tableName, update_value, condition,database);
+        return update.getCount();
     }
 
-    public void insert(String path, String name, String[][] cols) {
-        InsertTable.insertRows(path, name, cols);
+    public int insert(String name, String[][] cols) {
+        return InsertTable.insertRows(database+"\\"+name+".xml", name, cols);
     }
 
-    public void delete(String tableName, Object[] condition) {
-        Delete delete = new Delete(tableName,condition);
+    public int delete(String tableName, Object[][] condition) {
+        Delete delete = new Delete(tableName, condition,database);
+        return delete.getcount();
     }
 
-    public void select(String path,String name,String [] cols,Object[][] condition) {
-        selectTable.selectCols(path,name,cols,condition);
+    public Object[][] select(String name, String[] cols, Object[][] condition) {
+        return selectTable.selectCols(database+"\\"+name+".xml", name, cols, condition);
     }
 }

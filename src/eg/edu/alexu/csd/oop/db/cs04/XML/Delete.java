@@ -20,10 +20,12 @@ public class Delete {
 	private String tableName;
 	private Object[][] condition;
 	private int count = 0;
+	private String path;
 
-	public Delete(String tableName, Object[][] condition) {
+	public Delete(String tableName, Object[][] condition,String path) {
 		this.tableName = tableName;
 		this.condition = condition;
+		this.path = path;
 		count = delete();
 	}
 
@@ -31,7 +33,7 @@ public class Delete {
 		// TODO Auto-generated method stub
 		int counter = 0;
 		try {
-			String filepath = "dbs\\db1\\" + tableName + ".xml";
+			String filepath = path+"\\" + tableName + ".xml";
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(filepath);

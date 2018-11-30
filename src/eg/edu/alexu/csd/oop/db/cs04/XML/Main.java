@@ -1,10 +1,8 @@
 package eg.edu.alexu.csd.oop.db.cs04.XML;
 
-import javax.xml.stream.events.DTD;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -54,7 +52,7 @@ public class Main {
             e.printStackTrace();
         }
         try {
-            DeleteDataBase.deleteDirectoryStream(Paths.get(f.getPath()));
+            deleteDataBase.deleteDirectoryStream(Paths.get(f.getPath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
