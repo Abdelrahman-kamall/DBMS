@@ -4,28 +4,33 @@ import java.io.*;
 public class createDataBase {
 
     private String dbName ;
+    private boolean success = false;
     public createDataBase(String dbName){
         this.dbName = dbName;
         create();
     }
 
-    private void create(){
-        File theDir = new File("dbs\\" + dbName);
+    public boolean isSuccess() {
+        return success;
+    }
+
+    private boolean create(){
+        File theDir = new File(dbName);
 
         // if the directory does not exist, create it
         if (!theDir.exists()) {
-            boolean result = false;
+            success = false;
 
             try{
-                theDir.mkdir();
-                result = true;
+                theDir.mkdirs();
+                success = true;
+                return success;
             }
             catch(SecurityException se){
                 //handle it
-            }
-            if(result) {
-                System.out.println("DIR created");
+                return success;
             }
         }
+        return success;
     }
 }
