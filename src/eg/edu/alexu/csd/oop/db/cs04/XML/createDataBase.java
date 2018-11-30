@@ -3,7 +3,7 @@ package eg.edu.alexu.csd.oop.db.cs04.XML;
 import java.io.*;
 public class createDataBase {
 
-    String dbName ;
+    private String dbName ;
     public createDataBase(String dbName){
         this.dbName = dbName;
         create();

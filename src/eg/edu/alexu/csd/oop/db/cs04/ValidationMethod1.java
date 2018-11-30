@@ -3,7 +3,7 @@ package eg.edu.alexu.csd.oop.db.cs04;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class ValidationMethod1 {
+public class ValidationMethod1 {
 
     private int table = 1;
 

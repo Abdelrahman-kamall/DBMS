@@ -6,16 +6,18 @@ import java.nio.file.*;
 public class dropTable {
 
     private String tableName ;
-    public dropTable(String tableName){
+    private String path;
+    public dropTable(String tableName, String path){
         this.tableName = tableName;
+        this.path = path;
         drop();
     }
 
     public void drop(){
         try
         {
-            Files.deleteIfExists(Paths.get("dbs\\db1\\" + tableName + ".xml"));
-            Files.deleteIfExists(Paths.get("dbs\\db1\\" + tableName + ".dtd"));
+            Files.deleteIfExists(Paths.get(path+"\\" +  tableName + ".xml"));
+            Files.deleteIfExists(Paths.get(path+"\\" + tableName + ".dtd"));
         }
         catch(NoSuchFileException e)
         {

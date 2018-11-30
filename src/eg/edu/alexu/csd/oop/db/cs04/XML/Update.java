@@ -20,17 +20,19 @@ public class Update {
 	private String tableName;
 	private Object[][] update_value;
 	private Object[][] condition;
+	private String path;
 
-	public Update(String tableName, Object[][] update_value, Object[][] condition) {
+	public Update(String tableName, Object[][] update_value, Object[][] condition,String path) {
 		this.tableName = tableName;
 		this.condition = condition;
+		this.path = path;
 		this.update_value = update_value;
 		update();
 	}
 
 	private void update() {
 		try {
-			String filepath = "dbs\\db1\\" + tableName + ".xml";
+			String filepath = path+"\\" + tableName + ".xml";
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(filepath);

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 
-public class ParserMethode2 {
+public class ParserMethod2 {
     private int n=1;
     private boolean firstCase=false;
 
