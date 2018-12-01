@@ -11,10 +11,14 @@ public class mainDBMS {
     public static void main(String[] args) {
         Database db = new MyDatabase();
         try {
-           db.executeStructureQuery("Create Database test");
-           db.executeStructureQuery("Create Table t1 (column1 int, column2 varchar,column3 int) ");
-           db.executeUpdateQuery("INSERT INTO t1 VALUES (value1, 121, value3)");
-           db.createDatabase("test",true);
+//           db.executeStructureQuery("Create Database test");
+//           db.executeStructureQuery("Create Table t1 (column1 int, column2 varchar,column3 int) ");
+//           db.executeUpdateQuery("INSERT INTO t1 VALUES (value1, 121, value3)");
+//           db.createDatabase("test",true);
+            taskSplitter.parse("Create Database test",db);
+            taskSplitter.parse("Create Table t1 (column1 int, column2 varchar,column3 int); INSERT INTO t1 VALUES (2, 'value' , 3)",db);
+            taskSplitter.parse("Select * from t1",db);
+            //taskSplitter.parse("INSERT INTO t1 VALUES (value1, 121, value3)",db);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE t1 PUBLIC "" "t1.dtd">
+<t1>
+<row>
+<column1 type="int">2</column1>
+<column2 type="varchar">value</column2>
+<column3 type="int">3</column3>
+</row>
+</t1>
