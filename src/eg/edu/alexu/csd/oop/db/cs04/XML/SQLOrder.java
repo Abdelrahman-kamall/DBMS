@@ -2,55 +2,91 @@ package eg.edu.alexu.csd.oop.db.cs04.XML;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 
 public class SQLOrder {
 
-	private boolean firstInstance = true;
-	private String database = null;
-	private static final SQLOrder instance = new SQLOrder();
+    private boolean firstInstance = true;
+    private String database = null;
+    private static final SQLOrder instance = new SQLOrder();
 
-	private SQLOrder() {
-	}
+    private SQLOrder() {
+    }
 
-	public static SQLOrder getInstance() {
-		return instance;
-	}
+    public static SQLOrder getInstance() {
+        return instance;
+    }
 
-	public void createDatabase(String database) {
-		this.database = database;
-	}
+    public boolean createDatabase(String database) {
+        this.database = database;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("dbs\\");
+        stringBuilder.append(database);
+        this.database = stringBuilder.toString();
+        createDataBase createDataBase = new createDataBase(this.database);
+        return createDataBase.isSuccess();
+    }
 
-	public void dropDatabase(String database) {
-		try {
-			DeleteDataBase.deleteDirectoryStream(Paths.get(database));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    public boolean dropDatabase(String database) {
+        try {
+        	StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("dbs\\");
+            stringBuilder.append(database);
+            database=stringBuilder.toString();
+            deleteDataBase.deleteDirectoryStream(Paths.get(database));
+            this.database = null;
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
-	public void createTable(String[][] input, String tablename) {
-		createTable.createTable(database, input, tablename);
-	}
+    public boolean createTable(String[][] input, String tablename){
+        if (database != null) {
+            return createTable.createTable(input, tablename,database);
+        }else {
+            return false;
+        }
 
-	public void dropTable(String tablename) {
-		dropTable dropTable = new dropTable(database, tablename);
-	}
+    }
 
-	public int update(String tableName, Object[][] update_value, Object[][] condition) {
-		Update update = new Update(database, tableName, update_value, condition);
-		return update.getCount();
-	}
+    public boolean dropTable(String tablename) {
+        if (database != null) {
+            dropTable dropTable = new dropTable(tablename, database);
+            return dropTable.isSuccess();
+        }else {
+            return false;
+        }
+    }
 
-	public int insert(String name, String[][] cols) {
-		return InsertTable.insertRows(database, name, cols);
-	}
+    public int update(String tableName, Object[][] update_value, Object[][] condition) {
+        if(database!=null) {
+            Update update = new Update(tableName, update_value, condition, database);
+            return update.getCount();
+        }else {
+            return 0;
+        }
+    }
 
-	public int delete(String tableName, Object[][] condition) {
-		Delete delete = new Delete(database, tableName, condition);
-		return delete.getcount();
-	}
+    public int insert(String name, String[][] cols) {
+        if(database!=null)
+        return InsertTable.insertRows(database+"\\"+name+".xml", name, cols);
+        else return 0;
+    }
 
-	public void select(String name, String[] cols, Object[][] condition) {
-		selectTable.selectCols(database, name, cols, condition);
-	}
+    public int delete(String tableName, Object[][] condition) {
+        if(database!=null) {
+            Delete delete = new Delete(tableName, condition, database);
+            return delete.getcount();
+        }else {
+            return 0;
+        }
+    }
+
+    public Object[][] select(String name, String[] cols, Object[][] condition) {
+        if(database!=null)
+        return selectTable.selectCols(database+"\\"+name+".xml", name, cols, condition);
+        else return null;
+    }
 }

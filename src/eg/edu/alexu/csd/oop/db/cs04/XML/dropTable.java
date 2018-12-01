@@ -6,25 +6,33 @@ import java.nio.file.*;
 
 public class dropTable {
 
-	private String database;
-	private String tableName;
+    private String tableName;
+    private String path;
+    private boolean success = false;
 
-	public dropTable(String database, String tableName) {
-		this.tableName = tableName;
-		this.database = database;
-		drop();
-	}
+    public boolean isSuccess() {
+        return success;
+    }
 
-	public void drop() {
-		try {
-			Files.deleteIfExists(Paths.get("dbs\\" + database + "\\" + tableName + ".xml"));
-			Files.deleteIfExists(Paths.get("dbs\\" + database + "\\" + tableName + ".dtd"));
-		} catch (NoSuchFileException e) {
-			System.out.println("No such file/directory exists");
-		} catch (DirectoryNotEmptyException e) {
-			System.out.println("Directory is not empty.");
-		} catch (IOException e) {
-			System.out.println("Invalid permissions.");
-		}
-	}
+    public dropTable(String tableName, String path) {
+        this.tableName = tableName;
+        this.path = path;
+        drop();
+    }
+
+    public void drop() {
+        try {
+            Files.deleteIfExists(Paths.get(path + "\\" + tableName + ".xml"));
+            Files.deleteIfExists(Paths.get(path + "\\" + tableName + ".dtd"));
+            success = true;
+        } catch (NoSuchFileException e) {
+            System.out.println("No such file/directory exists");
+        } catch (DirectoryNotEmptyException e) {
+            System.out.println("Directory is not empty.");
+        } catch (IOException e) {
+            System.out.println("Invalid permissions.");
+        }
+    }
 }
+
+

@@ -13,14 +13,24 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class InsertTable {
     public static int insertRows(String path, String name, String[][] cols) {
-int no=0;
+        //path = path.concat("\\" + name + ".xml");
+    	if(cols[0][0]==null){
+            String pp = path.replace(".xml",".dtd");
+            cols[0] = DTDGenerator.getDTDColumns(pp);
+        }
+        int no = 0;
         if (!validateCols.validate(cols[0], path)) {
             return 0;
         }
         try {
+        	File file = new File(path);
+			if(!file.exists()) {
+				return -1;
+			}
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(path);
@@ -29,11 +39,13 @@ int no=0;
             Element root = doc.getDocumentElement();
             Element row = doc.createElement("row");
             root.appendChild(row);
-            if (cols[0].length < columns.length) {
+            if (cols[0].length <= columns.length) {
                 for (int i = 0; i < columns.length; i++) {
-                    if (Arrays.binarySearch(cols[0], columns[i]) >= 0) {
+                    List t = Arrays.asList(cols[0]);
+                    int index = t.indexOf(columns[i]);
+                    if (index >= 0) {
                         Element temp = doc.createElement(columns[i]);
-                        temp.setTextContent(((String) cols[1][i]));
+                        temp.setTextContent(((String) cols[1][index]));
                         row.appendChild(temp);
                     } else {
                         Element temp = doc.createElement(columns[i]);
@@ -41,16 +53,16 @@ int no=0;
                         row.appendChild(temp);
                     }
                 }
+                no++;
             } else {
                 for (int i = 0; i < columns.length; i++) {
                     Element temp = doc.createElement(columns[i]);
                     temp.setTextContent(((String) cols[1][i]));
                     row.appendChild(temp);
                 }
+                no++;
             }
-            no=root.getElementsByTagName("row").getLength();
-
-
+            //no = root.getElementsByTagName("row").getLength();
 
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -61,8 +73,8 @@ int no=0;
             transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             DOMImplementation domImpl = doc.getImplementation();
-            DocumentType doctype = domImpl.createDocumentType("doctype","",
-                    name+".dtd");
+            DocumentType doctype = domImpl.createDocumentType("doctype", "",
+                    name + ".dtd");
             transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
             transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
 
@@ -70,7 +82,6 @@ int no=0;
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File(path));
             transformer.transform(source, result);
-
 
 
         } catch (Exception e) {

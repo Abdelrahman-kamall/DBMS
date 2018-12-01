@@ -23,7 +23,7 @@ public class Update {
 	private Object[][] condition;
 	private int count = 0;
 
-	public Update(String database, String tableName, Object[][] update_value, Object[][] condition) {
+	public Update(String tableName, Object[][] update_value, Object[][] condition,String database) {
 		this.database = database;
 		this.tableName = tableName;
 		this.condition = condition;
@@ -34,7 +34,11 @@ public class Update {
 	private int update() {
 		int counter = 0;
 		try {
-			String filepath = "dbs\\" + database + "\\" + tableName + ".xml";
+			String filepath =  database + "\\" + tableName + ".xml";
+			File file = new File(filepath);
+			if(!file.exists()) {
+				return -1;
+			}
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(filepath);
@@ -56,7 +60,7 @@ public class Update {
 						String colName = "";
 						boolean f = false;
 						for (int j = 0; j < condition.length; j++) {
-							if (!condition[j][0].equals("0")) {
+							if (condition[j][0]!=null) {
 								colName = condition[j][0].toString();
 							}
 						}
@@ -71,6 +75,8 @@ public class Update {
 						}
 						if (!f) {
 							flag = updateWithCondition(col);
+						}else {
+							flag = updateWithoutCondition(col);
 						}
 					} else {
 						flag = updateWithoutCondition(col);
@@ -115,19 +121,19 @@ public class Update {
 	private boolean updateWithCondition(Element col) {
 		// TODO Auto-generated method stub
 		// Check update's condition.
-		if (!condition[0][0].equals("0")) {
+		if (condition[0][0]!=null) {
 			if (col.getElementsByTagName(condition[0][0].toString()).item(0).getTextContent()
 					.equals(condition[0][1].toString())) {
 				// Loop over cols to update.
 				return updateWithoutCondition(col);
 			}
-		} else if (!condition[1][0].equals("0")) {
+		} else if (condition[1][0]!=null) {
 			if (col.getElementsByTagName(condition[1][0].toString()).item(0).getTextContent()
 					.compareTo(condition[1][1].toString()) > 0) {
 				// Loop over cols to update.
 				return updateWithoutCondition(col);
 			}
-		} else if (!condition[2][0].equals("0")) {
+		} else if (condition[2][0]!=null) {
 			if (col.getElementsByTagName(condition[2][0].toString()).item(0).getTextContent()
 					.compareTo(condition[2][1].toString()) < 0) {
 				// Loop over cols to update.
