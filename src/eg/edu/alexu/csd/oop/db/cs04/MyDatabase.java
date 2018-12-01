@@ -6,9 +6,11 @@ import java.io.File;
 import java.sql.SQLException;
 
 public class MyDatabase implements Database {
+	
+	private boolean DBflag = false;
     @Override
     public String createDatabase(String databaseName, boolean dropIfExists) {
-
+    	DBflag = true;
         Character sp = System.getProperty("file.separator").charAt(0);
         File file = new File("dbs" + sp + databaseName);
         String path = file.getAbsolutePath();
@@ -36,21 +38,33 @@ public class MyDatabase implements Database {
     	query=query.toLowerCase();
 		ValidationMethod1 v = new ValidationMethod1();
 		ParserMethod1 p =new ParserMethod1();
-		if (v.CreateDB(query)) {
-			return p.CreateDB(query);
+            boolean flag1 =false;
+        boolean flag2 =false;
+            if (v.CreateDB(query)) {
+            	
+                flag2= p.CreateDB(query);
 
-		} if (v.CreateT(query)){
-			return p.CreateT(query);
+                flag1= true;
+            } if (v.CreateT(query)){
+            	flag2 = p.CreateT(query);
+                flag1= true;
 
-		}if(v.DropDB(query)){
-		    return p.DropDB(query);
 
-        }if (v.DropT(query)){
-		    return p.DropT(query);
+            }if(v.DropDB(query)){
+                flag2= p.DropDB(query);
+            flag1= true;
 
-        }else {
-		    return false;
-        }
+            }if (v.DropT(query)){
+                flag2= p.DropT(query);
+            flag1= true;
+            }
+
+            if(!flag1 || !DBflag){
+                throw new SQLException();
+            }
+
+            return flag2;
+
     }
 
     @Override
@@ -61,7 +75,7 @@ public class MyDatabase implements Database {
         if (v.validateSelect(query)){
             return p.parse1(query);
         }
-        return new Object[0][];
+        throw new SQLException();
     }
 
     @Override
@@ -83,7 +97,7 @@ public class MyDatabase implements Database {
             rowsnum=par3.DeleteD(query);
             flag=true;
         }
-        if(!flag) {
+        if(!flag || !DBflag) {
         	throw new SQLException();
         }
        

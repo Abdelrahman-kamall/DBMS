@@ -30,8 +30,8 @@ public class ParserMethod1 {
                 a[1][ii-1] = matcher2.group((ii + 2 * ii) + 1);
             }
 
-            SQLOrder.getInstance().createTable(a,matcher2.group(1).toLowerCase());
-            return true;
+
+            return SQLOrder.getInstance().createTable(a,matcher2.group(1).toLowerCase());
         }
         return false;
     }
