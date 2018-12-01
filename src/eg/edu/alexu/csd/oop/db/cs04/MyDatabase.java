@@ -63,6 +63,15 @@ public class MyDatabase implements Database {
             }
 
             if(!flag1 || (!DBflag && !flag3)){
+            	if(!flag1) {
+            		System.out.println("syntax error");
+            	}
+            	if(!flag2) {
+            		System.out.println("error ,, operation failed");
+            	}
+            	if(DBflag) {
+            		System.out.println("no such database");
+            	}
                 throw new SQLException();
             }
 
@@ -79,7 +88,13 @@ public class MyDatabase implements Database {
         	if(p.parse1(query)!= null) {
             return p.parse1(query);
         	}
+        	System.out.println("no such table");
+        	throw new SQLException();
         }
+        if(!DBflag) {
+        	System.out.println("no such database");
+        }
+        System.out.println("syntax error");
         throw new SQLException();
     }
 
@@ -103,6 +118,15 @@ public class MyDatabase implements Database {
             flag=true;
         }
         if(!flag || !DBflag || rowsnum==-1) {
+        	if(rowsnum==-1) {
+        		System.out.println("no such table");
+        	}
+        	if(!flag) {
+        		System.out.println("syntax error");
+        	}
+        	if(!DBflag) {
+        		System.out.println("no such database");
+        	}
         	throw new SQLException();
         }
        
