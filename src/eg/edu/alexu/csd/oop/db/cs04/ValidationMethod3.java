@@ -37,10 +37,10 @@ public class ValidationMethod3 {
         if(lines.length>1) {
             insertD+="\\s*\\)\\s*";
         }
-        insertD+="VALUES\\s*\\(\\s*'?\"?(.*[^'\";\\s])'?\"?"; 
+        insertD+="VALUES\\s*\\(\\s*('.*[^'\";\\s]'|\\d+)\\s*";
         
         for(int counter =0;counter <second ;counter++) {
-            insertD+="\\s*,\\s*'?\"?(.*[^'\";\\s])'?\"?";
+            insertD+="\\s*,\\s*('.*[^'\";\\s]'|\\d+)\\s*";
         }
         insertD+="\\s*\\)\\s*;?\\s*";
     
@@ -102,14 +102,14 @@ public class ValidationMethod3 {
     }
 
     private String UpdateDRegex(String s) {
-        String updateD ="^\\s*update\\s+(\\w+)\\s+set\\s+(\\w+)\\s*=\\s*'?\"?(.*[^'\";\\s])'?\"?";
+        String updateD ="^\\s*update\\s+(\\w+)\\s+set\\s+(\\w+)\\s*=\\s*('.*[^'\";\\s]'|\\d+)\\s*";
         Pattern pattern1 = Pattern.compile(updateD, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(s);
         matcher.find();
         String regex = pattern1.toString();
         int num=numofcom(s);
         for(int counter =0 ; counter<num;counter++) {
-            regex += ",\\s*(\\w+)\\s*=\\s*'?\"?(.*[^'\";\\s])'?\"?";
+            regex += ",\\s*(\\w+)\\s*=\\s*('.*[^'\";\\s]'|\\d+)\\s*";
         }
 		/*
 		String regex1 = "";
@@ -127,7 +127,7 @@ public class ValidationMethod3 {
 		*/
         String s1 = s.toLowerCase();
         if(s1.contains("where")) {
-        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
+        regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*('.*[^'\";\\s]'|\\d+)\\s*)\\s*;?\\s*";
         }else {
         	
         }
@@ -139,7 +139,7 @@ public class ValidationMethod3 {
         String deleteD ="^\\s*delete\\s+from\\s+(\\w+)\\s*;?";
         String s1 = query.toLowerCase();
         if(s1.contains("where")) {
-            deleteD+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
+            deleteD+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*('.*[^'\";\\s]'|\\d*)\\s*)\\s*;?\\s*";
         }else {
 
         }
