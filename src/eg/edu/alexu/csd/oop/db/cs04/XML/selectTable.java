@@ -7,6 +7,8 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class selectTable {
@@ -15,6 +17,12 @@ public class selectTable {
         ArrayList<ArrayList<Object>> table = new ArrayList<>();
         Object[][] array = new String[0][0];
         try {
+        	
+    			
+    			File file = new File(path);
+    			if(!file.exists()) {
+    				return null;
+    			}
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(path);
