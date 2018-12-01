@@ -34,6 +34,10 @@ public class Delete {
 		int counter = 0;
 		try {
 			String filepath = path+"\\" + tableName + ".xml";
+			File file = new File(filepath);
+			if(!file.exists()) {
+				return -1;
+			}
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(filepath);
@@ -70,6 +74,8 @@ public class Delete {
 						}
 						if (!f) {
 							flag = deleteWithCondition(nNode, col);
+						}else {
+							flag = deleteWithoutCondition(nNode, col);
 						}
 					} else {
 						flag = deleteWithoutCondition(nNode, col);

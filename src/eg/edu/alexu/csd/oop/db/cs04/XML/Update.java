@@ -35,6 +35,10 @@ public class Update {
 		int counter = 0;
 		try {
 			String filepath =  database + "\\" + tableName + ".xml";
+			File file = new File(filepath);
+			if(!file.exists()) {
+				return -1;
+			}
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(filepath);
@@ -71,6 +75,8 @@ public class Update {
 						}
 						if (!f) {
 							flag = updateWithCondition(col);
+						}else {
+							flag = updateWithoutCondition(col);
 						}
 					} else {
 						flag = updateWithoutCondition(col);

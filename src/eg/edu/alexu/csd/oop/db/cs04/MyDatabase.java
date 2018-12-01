@@ -76,7 +76,9 @@ public class MyDatabase implements Database {
         ValidationMethod2 v= new ValidationMethod2();
         ParserMethod2 p = new ParserMethod2();
         if (v.validateSelect(query)){
+        	if(p.parse1(query)!= null) {
             return p.parse1(query);
+        	}
         }
         throw new SQLException();
     }
@@ -100,7 +102,7 @@ public class MyDatabase implements Database {
             rowsnum=par3.DeleteD(query);
             flag=true;
         }
-        if(!flag || !DBflag) {
+        if(!flag || !DBflag || rowsnum==-1) {
         	throw new SQLException();
         }
        

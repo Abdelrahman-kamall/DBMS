@@ -144,8 +144,8 @@ public class ParserMethod3 {
         }
 
         for(int counter=0;counter<3;counter++) {
-            conditions[counter][0]=0;
-            conditions[counter][1]=0;
+            conditions[counter][0]=null;
+            conditions[counter][1]=null;
         }
         if(matcher2.groupCount()>(numofcom+1)*2) {
             conditions=decideCond(matcher2.group((numofcom+1)*2+1),matcher2.group((numofcom+1)*2+2),matcher2.group((numofcom+1)*2+3));

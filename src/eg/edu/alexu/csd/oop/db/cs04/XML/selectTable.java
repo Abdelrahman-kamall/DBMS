@@ -38,7 +38,7 @@ public class selectTable {
                 for (int i = 0; i < rows.getLength(); i++) {
                     Node row = rows.item(i);
                     Element r = ((Element) row);
-                    if (condition != null ) {
+                    if (condition[0][0]!=null ||  condition[1][0]!=null || condition[2][0]!=null) {
                         if(selectWithCondition(row, r, condition, table)){
                             no++;
                         }

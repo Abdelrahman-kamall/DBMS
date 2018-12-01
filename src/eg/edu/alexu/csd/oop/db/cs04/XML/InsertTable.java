@@ -18,12 +18,19 @@ import java.util.List;
 public class InsertTable {
     public static int insertRows(String path, String name, String[][] cols) {
         //path = path.concat("\\" + name + ".xml");
-    	
+    	if(cols[0][0]==null){
+            String pp = path.replace(".xml",".dtd");
+            cols[0] = DTDGenerator.getDTDColumns(pp);
+        }
         int no = 0;
         if (!validateCols.validate(cols[0], path)) {
             return 0;
         }
         try {
+        	File file = new File(path);
+			if(!file.exists()) {
+				return -1;
+			}
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(path);
