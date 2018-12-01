@@ -73,14 +73,6 @@ public class ParserMethod1 {
         	regex += "\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
         	table++;
         }
-       /*while (!s1.equals(s) && matcher.find()) {
-            regex += "\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
-            pattern1 = Pattern.compile(regex);
-            matcher = pattern1.matcher(s);
-            matcher.find();
-            s1 = matcher.group(0);
-            table++;
-        }*/
         return regex;
     }
     

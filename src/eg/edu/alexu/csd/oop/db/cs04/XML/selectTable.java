@@ -57,7 +57,6 @@ public class selectTable {
                     }
                 }
             }
-            System.out.println();
             table.remove(0);
             array = new Object[table.size()][];
             for (int i = 0; i < table.size(); i++) {
@@ -91,7 +90,7 @@ public class selectTable {
         if (condition[0][0] != null) {
             String value = col.getElementsByTagName(condition[0][0].toString()).item(0).getTextContent();
             String v2 = condition[0][1].toString();
-            System.out.println(value.compareTo(v2));
+            
             if (value.equals(v2)) {
                 selectWithoutCondition(nNode, col, condition, table);
                 return true;
@@ -100,7 +99,7 @@ public class selectTable {
         } else if (condition[1][0] != null) {
             String value = col.getElementsByTagName(condition[1][0].toString()).item(0).getTextContent();
             String v2 = condition[1][1].toString();
-            System.out.println(value.compareTo(v2));
+            
             if (value.compareTo(v2) > 0 || value.length()>v2.length()) {
                 selectWithoutCondition(nNode, col, condition, table);
                 return true;
@@ -109,7 +108,7 @@ public class selectTable {
         } else if (condition[2][0] != null) {
             String value = col.getElementsByTagName(condition[2][0].toString()).item(0).getTextContent();
             String v2 = condition[2][1].toString();
-            System.out.println(value.compareTo(v2));
+            
             if (value.compareTo(v2) < 0 || value.length()<v2.length()) {
                 selectWithoutCondition(nNode, col, condition, table);
                 return true;

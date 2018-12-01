@@ -38,15 +38,6 @@ public class ParserMethod3 {
 
         int num =
         SQLOrder.getInstance().insert(tableName.toLowerCase(),elements);
-
-		/*System.out.println(tableName);
-		for(int counter =0;counter<2;counter++) {
-			for(int counter1 =0;counter1<second;counter1++) {
-				System.out.print(elements[counter][counter1]+" ");
-			}
-			System.out.println();
-		}
-*/
         return num;
     }
 

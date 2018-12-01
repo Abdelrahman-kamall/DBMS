@@ -33,8 +33,6 @@ public class ParserMethod2 {
             makeNull(a);
 
             return SQLOrder.getInstance().select(matcher.group(1).toLowerCase(),a,b);
-            //selectTable.selectCols()
-            //return callMethod(matcher.group(1),null,null);
         }if (!compeleteRegex(query,simpleRegex)){
             pattern1 = Pattern.compile(createComRegex(query),CASE_INSENSITIVE);
             matcher = pattern1.matcher(query);
@@ -125,7 +123,6 @@ public class ParserMethod2 {
             pattern = Pattern.compile(ss+where,CASE_INSENSITIVE);
             matcher = pattern.matcher(query);
             if(matcher.find() &&compeleteRegex(query,ss+where) ){
-                System.out.println(matcher.groupCount());
                 return ss+where;
             }
         }

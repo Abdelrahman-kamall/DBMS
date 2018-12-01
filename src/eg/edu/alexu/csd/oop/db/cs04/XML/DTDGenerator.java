@@ -21,7 +21,6 @@ public class DTDGenerator {
     public static void writeDTD(String path, String name, String[][] cols) {
         try {
             File ff = new File(path);
-            System.out.println(ff.createNewFile());
             FileWriter fw = null;
             fw = new FileWriter(ff);
             fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -54,14 +53,13 @@ public class DTDGenerator {
         try {
             FileReader fileReader = new FileReader(new File(path));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            System.out.println(bufferedReader.readLine());
-            System.out.println(bufferedReader.readLine());
+            bufferedReader.readLine();
+            bufferedReader.readLine();
             String regex = "[\\(,\\)]";
             x = bufferedReader.readLine().split(regex);
             String[] cols = new String[x.length-2];
             for (int i=1;i<x.length-1;i++) {
                 cols[i-1]=x[i];
-                System.out.println(x[i]);
             }
             fileReader.close();
             bufferedReader.close();
@@ -78,10 +76,6 @@ public class DTDGenerator {
             String p = path.replace(".xml",".dtd");
             FileReader fileReader = new FileReader(new File(path));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            System.out.println(bufferedReader.readLine());
-            System.out.println(bufferedReader.readLine());
-            System.out.println(bufferedReader.readLine());
-            System.out.println(bufferedReader.readLine());
             String regex = "[\"]";
             List<List<String>> colstypes = new ArrayList<>();
             colstypes.add(Arrays.asList(getDTDColumns(p)));

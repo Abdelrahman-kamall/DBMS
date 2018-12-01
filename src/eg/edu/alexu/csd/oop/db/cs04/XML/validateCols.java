@@ -12,9 +12,7 @@ public class validateCols {
         if (given.length <= standard.length) {
             List<String> temp = Arrays.asList(standard);
             for (int i = 0; i < given.length; i++) {
-                if (temp.indexOf(given[i])>=0) {
-                    System.out.println("Valid");
-                } else {
+                if (!(temp.indexOf(given[i])>=0)) {
                     return false;
                 }
             }

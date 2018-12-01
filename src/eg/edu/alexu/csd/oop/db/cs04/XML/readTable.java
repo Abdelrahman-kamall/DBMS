@@ -30,7 +30,6 @@ public class readTable {
             document.getDocumentElement().normalize();
 
             //get Table name
-            System.out.println("Root element :" + document.getDocumentElement().getNodeName());
             //get rows
             NodeList rows = document.getElementsByTagName("row");
 
