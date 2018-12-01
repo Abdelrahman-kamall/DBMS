@@ -27,14 +27,14 @@ public class ValidationMethod3 {
         	second = numofcom(lines[1]);
         	
         }
-        String insertD ="insert\\s+into\\s+(\\w+)\\s*";
-        if(first !=0) {
+        String insertD ="^\\s*insert\\s+into\\s+(\\w+)\\s*";
+        if(lines.length>1) {
             insertD+="\\(\\s*(\\w+)\\s*";
         }
         for(int counter =0;counter <first ;counter++) {
             insertD+=",\\s*(\\w+)\\s*";
         }
-        if(first !=0) {
+        if(lines.length>1) {
             insertD+="\\s*\\)\\s*";
         }
         insertD+="VALUES\\s*\\(\\s*'?\"?(.*[^'\";\\s])'?\"?"; 
@@ -102,7 +102,7 @@ public class ValidationMethod3 {
     }
 
     private String UpdateDRegex(String s) {
-        String updateD ="update\\s+(\\w+)\\s+set\\s+(\\w+)\\s*=\\s*'?\"?(.*[^'\";\\s])'?\"?";
+        String updateD ="^\\s*update\\s+(\\w+)\\s+set\\s+(\\w+)\\s*=\\s*'?\"?(.*[^'\";\\s])'?\"?";
         Pattern pattern1 = Pattern.compile(updateD, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(s);
         matcher.find();
@@ -136,7 +136,7 @@ public class ValidationMethod3 {
 
     public boolean DeleteD(String query) {
 
-        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?";
+        String deleteD ="^\\s*delete\\s+from\\s+(\\w+)\\s*;?";
         String s1 = query.toLowerCase();
         if(s1.contains("where")) {
             deleteD+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";

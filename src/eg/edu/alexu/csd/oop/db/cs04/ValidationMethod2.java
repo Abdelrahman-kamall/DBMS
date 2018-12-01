@@ -10,7 +10,7 @@ public class ValidationMethod2 {
 
     public boolean validateSelect(String query){
         String simpleRegex;
-        simpleRegex="SELECT\\s*\\*\\s*FROM\\s(\\w+)\\s*;?";
+        simpleRegex="^\\s*SELECT\\s*\\*\\s*FROM\\s*(\\w+)\\s*;?";
         Pattern pattern1 = Pattern.compile(simpleRegex,CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(query);
         if(matcher.find()&&compeleteRegex(query,simpleRegex)){
@@ -94,7 +94,7 @@ public class ValidationMethod2 {
             }
         }
 
-        regex="select"+half+end;
+        regex="^\\s*select"+half+end;
         return regex;
     }
 

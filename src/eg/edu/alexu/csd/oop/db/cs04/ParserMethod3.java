@@ -14,7 +14,7 @@ public class ParserMethod3 {
         Matcher matcher1 = pattern1.matcher(query);
         matcher1.find();
         String tableName = matcher1.group(1);
-        
+
         String[] lines = query.split("\\)");
         int first = numofcom(lines[0])+1;
         int second =0;
@@ -25,7 +25,7 @@ public class ParserMethod3 {
         }else {
         	second = numofcom(lines[1])+1;
         }
-        
+
         String[][] elements = new String[2][second];
         int m = 0;
         for(int counter =second ; counter >= 1 ; counter--) {
@@ -52,24 +52,24 @@ public class ParserMethod3 {
         }else {
         	second = numofcom(lines[1]);
         }
-        String insertD ="insert\\s+into\\s+(\\w+)\\s*";
-        if(first !=0) {
+        String insertD ="^\\s*insert\\s+into\\s+(\\w+)\\s*";
+        if(lines.length>1) {
             insertD+="\\(\\s*(\\w+)\\s*";
         }
         for(int counter =0;counter <first ;counter++) {
             insertD+=",\\s*(\\w+)\\s*";
         }
-        if(first !=0) {
+        if(lines.length>1) {
             insertD+="\\s*\\)\\s*";
         }
-        insertD+="VALUES\\s*\\(\\s*'?\"?(.*[^'\";\\s])'?\"?";
-        
+        insertD+="VALUES\\s*\\(\\s*('.*[^'\";\\s]'|.*[^'\";\\s])";
+
         for(int counter =0;counter <second ;counter++) {
-            insertD+="\\s*,\\s*'?\"?(.*[^'\";\\s])'?\"?";
+            insertD+="\\s*,\\s*('.*[^'\";\\s]'|.*[^'\";\\s])";
         }
         insertD+="\\s*\\)\\s*;?\\s*";
-        
-        
+
+
 
         return insertD;
 
@@ -162,14 +162,14 @@ public class ParserMethod3 {
     }
 
     private String UpdateDRegex(String s) {
-        String updateD ="update\\s+(\\w+)\\s+set\\s+(\\w+)\\s*=\\s*'?\"?(.*[^'\";\\s])'?\"?";
+        String updateD ="^\\s*UPDATE\\s+(\\w+)\\s+SET\\s+(\\w+)\\s*=\\s*('.*[^'\";\\s]'|.*[^'\";\\s])";
         Pattern pattern1 = Pattern.compile(updateD, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(s);
         matcher.find();
         String regex = pattern1.toString();
         int num=numofcom(s);
         for(int counter =0 ; counter<num;counter++) {
-            regex += ",\\s*(\\w+)\\s*=\\s*'?\"?(.*[^'\";\\s])'?\"?";
+            regex += ",\\s*(\\w+)\\s*=\\s*('.*[^'\";\\s]'|.*[^'\";\\s])";
         }
 	/*
 	String regex1 = "";
@@ -189,7 +189,7 @@ public class ParserMethod3 {
         if(s1.contains("where")) {
             regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
             }else {
-            	
+
             }
         return regex;
     }
@@ -197,13 +197,13 @@ public class ParserMethod3 {
 
 
     public int DeleteD(String query) {
-    	
-        String deleteD ="delete\\s+from\\s+(\\w+)\\s*;?";
+
+        String deleteD ="^\\s*delete\\s+from\\s+(\\w+)\\s*;?";
         String s1 = query.toLowerCase();
         if(s1.contains("where")) {
         	deleteD+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*'?\"?(.*[^'\";\\s])'?\"?)\\s*;?\\s*";
             }else {
-            	
+
             }
         Pattern pattern3 = Pattern.compile(deleteD, Pattern.CASE_INSENSITIVE);
         Matcher matcher3 = pattern3.matcher(query);

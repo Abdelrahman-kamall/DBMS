@@ -9,7 +9,7 @@ public class ParserMethod1 {
     private int table = 1;
 
     public boolean CreateDB(String query) {
-        String createDB = "\\s*CREATE\\s+DATABASE\\s+'?(.*[^;'\\s])'?\\s*;?\\s*";
+        String createDB = "^\\s*CREATE\\s+DATABASE\\s+'?(.*[^;'\\s])'?\\s*;?\\s*";
         Pattern pattern1 = Pattern.compile(createDB, Pattern.CASE_INSENSITIVE);
         Matcher matcher1 = pattern1.matcher(query);
         if (matcher1.find()) {
@@ -37,7 +37,7 @@ public class ParserMethod1 {
     }
 
     public boolean DropDB(String query) {
-        String dropDB = "\\s*DROP\\s+DATABASE\\s+'?(.*[^;'\\s])'?\\s*;?\\s*";
+        String dropDB = "^\\s*DROP\\s+DATABASE\\s+'?(.*[^;'\\s])'?\\s*;?\\s*";
         Pattern pattern3 = Pattern.compile(dropDB, Pattern.CASE_INSENSITIVE);
         Matcher matcher3 = pattern3.matcher(query);
         if (matcher3.find()) {
@@ -49,7 +49,7 @@ public class ParserMethod1 {
     }
 
     public boolean DropT(String query) {
-        String dropT = "\\s*drop\\s+table\\s(\\w+)\\s*;?\\s*";
+        String dropT = "^\\s*drop\\s+table\\s(\\w+)\\s*;?\\s*";
         Pattern pattern4 = Pattern.compile(dropT, Pattern.CASE_INSENSITIVE);
         Matcher matcher4 = pattern4.matcher(query);
         if (matcher4.find()) {
@@ -62,7 +62,7 @@ public class ParserMethod1 {
 
     private String CreateTableRegex(String s) {
     	int numofcom = numofcom(s);
-    	String createT = "\\s*create\\s+table\\s+(\\w+)\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
+    	String createT = "^\\s*create\\s+table\\s+(\\w+)\\s*\\(\\s*((\\w+)\\s+(int|varchar)\\s*,?)?\\s*\\)?\\s*;?\\s*";
         Pattern pattern1 = Pattern.compile(createT,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(s);
         matcher.find();
@@ -70,7 +70,7 @@ public class ParserMethod1 {
         String s1 = matcher.group(0);
         
         for(int counter=0;counter<numofcom;counter++) {
-        	regex += "\\s*((\\w+)\\s+(int|varchar)\\s*\\(?\\d*\\)?\\s*,?)?\\s*\\)?\\s*;?\\s*";
+        	regex += "\\s*((\\w+)\\s+(int|varchar)\\s*,?)?\\s*\\)?\\s*;?\\s*";
         	table++;
         }
         return regex;

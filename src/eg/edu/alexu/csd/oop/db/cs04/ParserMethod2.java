@@ -25,7 +25,7 @@ public class ParserMethod2 {
         makeNull(b);
         makeNull(a);
         String simpleRegex;
-        simpleRegex="SELECT\\s+\\*\\s+FROM\\s(\\w+)\\s*;?\\s*";
+        simpleRegex="^\\s*SELECT\\s+\\*\\s+FROM\\s*(\\w+)\\s*;?\\s*";
         Pattern pattern1 = Pattern.compile(simpleRegex,CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(query);
         if(matcher.find()&&compeleteRegex(query,simpleRegex)){
@@ -106,14 +106,14 @@ public class ParserMethod2 {
             }
         }
 
-        regex="select"+half+end;
+        regex="^\\s*select"+half+end;
         return regex;
     }
 
     private String createVeryComRegex(String query){
-        String sf="SELECT\\s+\\*\\s+FROM\\s(\\w+)\\s*;?\\s*";
+        String sf="^\\s*SELECT\\s+\\*\\s+FROM\\s(\\w+)\\s*;?\\s*";
         String ss=createComRegex(query);
-        String where = "WHERE\\s+(\\w+)\\s*([=<>])\\s*'?(.*[^;'\\s])'?\\s*;?\\s*";
+        String where = "\\s*WHERE\\s+(\\w+)\\s*([=<>])\\s*'?(.*[^;'\\s])'?\\s*;?\\s*";
         Pattern pattern = Pattern.compile(sf+where,CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(query);
         if(matcher.find()&&compeleteRegex(query,sf+where)){

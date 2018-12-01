@@ -6,4 +6,9 @@
 <column2 type="varchar">value</column2>
 <column3 type="int">3</column3>
 </row>
+<row>
+<column1 type="int">2</column1>
+<column2 type="varchar">value</column2>
+<column3 type="int">3</column3>
+</row>
 </t1>
