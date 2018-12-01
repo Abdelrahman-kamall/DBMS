@@ -38,11 +38,12 @@ public class selectTable {
                 for (int i = 0; i < rows.getLength(); i++) {
                     Node row = rows.item(i);
                     Element r = ((Element) row);
-                    if (condition != null) {
+                    if (condition != null ) {
                         if(selectWithCondition(row, r, condition, table)){
                             no++;
                         }
-                    } else {
+
+                    }else {
                         selectWithoutCondition(row, r, condition, table);
                         no++;
                     }

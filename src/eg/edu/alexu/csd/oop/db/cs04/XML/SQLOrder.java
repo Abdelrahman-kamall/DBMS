@@ -2,6 +2,7 @@ package eg.edu.alexu.csd.oop.db.cs04.XML;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 
 public class SQLOrder {
 
@@ -41,7 +42,7 @@ public class SQLOrder {
         }
     }
 
-    public boolean createTable(String[][] input, String tablename) {
+    public boolean createTable(String[][] input, String tablename){
         if (database != null) {
             return createTable.createTable(input, tablename,database);
         }else {

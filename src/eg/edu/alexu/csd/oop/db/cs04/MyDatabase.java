@@ -39,9 +39,10 @@ public class MyDatabase implements Database {
 		ValidationMethod1 v = new ValidationMethod1();
 		ParserMethod1 p =new ParserMethod1();
             boolean flag1 =false;
-        boolean flag2 =false;
+            boolean flag2 =false;
+            boolean flag3 = false;
             if (v.CreateDB(query)) {
-            	
+            	DBflag = true;
                 flag2= p.CreateDB(query);
 
                 flag1= true;
@@ -51,15 +52,17 @@ public class MyDatabase implements Database {
 
 
             }if(v.DropDB(query)){
+            	flag3=true;
+            	DBflag = false;
                 flag2= p.DropDB(query);
-            flag1= true;
+                flag1= true;
 
             }if (v.DropT(query)){
                 flag2= p.DropT(query);
             flag1= true;
             }
 
-            if(!flag1 || !DBflag){
+            if(!flag1 || (!DBflag && !flag3)){
                 throw new SQLException();
             }
 
