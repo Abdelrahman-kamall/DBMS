@@ -52,7 +52,8 @@ public class DTDGenerator {
     public static String[] getDTDColumns(String path) {
         String[] x = null;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
+            FileReader fileReader = new FileReader(new File(path));
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
             System.out.println(bufferedReader.readLine());
             System.out.println(bufferedReader.readLine());
             String regex = "[\\(,\\)]";
@@ -62,6 +63,8 @@ public class DTDGenerator {
                 cols[i-1]=x[i];
                 System.out.println(x[i]);
             }
+            fileReader.close();
+            bufferedReader.close();
             return cols;
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +76,8 @@ public class DTDGenerator {
         String[] x = null;
         try {
             String p = path.replace(".xml",".dtd");
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(p)));
+            FileReader fileReader = new FileReader(new File(path));
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
             System.out.println(bufferedReader.readLine());
             System.out.println(bufferedReader.readLine());
             System.out.println(bufferedReader.readLine());
@@ -93,6 +97,8 @@ public class DTDGenerator {
                 List<String> row = colstypes.get(i);
                 array[i] = row.toArray(new String[row.size()]);
             }
+            fileReader.close();
+            bufferedReader.close();
             return array;
         } catch (Exception e) {
             e.printStackTrace();
