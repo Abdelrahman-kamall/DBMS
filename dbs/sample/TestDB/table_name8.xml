@@ -3,7 +3,7 @@
 <table_name8>
 <row>
 <column_name1 type="varchar">value1</column_name1>
-<column_name2 type="int">4</column_name2>
-<column_name3 type="varchar">value2</column_name3>
+<column_name2 type="int">value2</column_name2>
+<column_name3 type="varchar">4</column_name3>
 </row>
 </table_name8>

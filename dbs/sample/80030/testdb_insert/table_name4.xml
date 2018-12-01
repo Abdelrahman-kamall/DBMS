@@ -1,0 +1,17 @@
+<<<<<<< HEAD:dbs/sample/TestDB/table_name5.xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><table_name5>
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE table_name4 PUBLIC "" "table_name4.dtd">
+<table_name4>
+>>>>>>> refs/remotes/origin/Zeny:dbs/sample/80030/testdb_insert/table_name4.xml
+<row>
+<column_name1 type="varchar">value1</column_name1>
+<column_name2 type="int">value3</column_name2>
+<column_name3 type="varchar">4</column_name3>
+</row>
+<<<<<<< HEAD:dbs/sample/TestDB/table_name5.xml
+</table_name5>
+=======
+</table_name4>
+>>>>>>> refs/remotes/origin/Zeny:dbs/sample/80030/testdb_insert/table_name4.xml

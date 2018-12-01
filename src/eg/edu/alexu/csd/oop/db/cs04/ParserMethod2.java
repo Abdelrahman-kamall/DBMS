@@ -133,28 +133,30 @@ public class ParserMethod2 {
     }
 
     private Object[][] afterWhere(Matcher matcher){
-        if(firstCase)
+        if(firstCase){
             n--;
+            firstCase=false;
+        }
 
         Object[][] a=new Object[3][2];
         String s=  matcher.group(n + 3);
         if(s.equals("=")){
             a[0][0]=matcher.group(n+2).toLowerCase();
-            a[1][0]=matcher.group(n+4);
-            a[0][1]=null;
-            a[0][2]=null;
+            a[0][1]=matcher.group(n+4);
+            a[1][0]=null;
             a[1][1]=null;
-            a[1][2]=null;
+            a[2][0]=null;
+            a[2][1]=null;
         }else if(s.equals(">")){
-            a[0][1]=matcher.group(n+2).toLowerCase();
+            a[1][0]=matcher.group(n+2).toLowerCase();
             a[1][1]=matcher.group(n+4);
             a[0][0]=null;
-            a[0][2]=null;
-            a[1][0]=null;
-            a[1][2]=null;
+            a[0][1]=null;
+            a[2][0]=null;
+            a[2][1]=null;
         }else if(s.equals("<")){
-            a[0][2]=matcher.group(n+2).toLowerCase();
-            a[1][2]=matcher.group(n+4);
+            a[2][0]=matcher.group(n+2).toLowerCase();
+            a[2][1]=matcher.group(n+4);
             a[0][1]=null;
             a[0][0]=null;
             a[1][1]=null;
