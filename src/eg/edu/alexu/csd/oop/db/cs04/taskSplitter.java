@@ -43,7 +43,7 @@ public class taskSplitter {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }else if(s.contains("insert") || s.contains("delete") || s.contains("uodate")){
+            }else if(s.contains("insert") || s.contains("delete") || s.contains("update")){
                 try {
                     System.out.println(database.executeUpdateQuery(s));
                 } catch (SQLException e) {
