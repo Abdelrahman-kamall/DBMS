@@ -57,13 +57,17 @@ public class taskSplitter {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			} else if (s.contains("insert") || s.contains("delete") || s.contains("update")) {
+			} else if (s.contains("insert") || s.contains("delete") || s.contains("update") || s.contains("truncate")) {
 				try {
+					if (s.contains("truncate")) {
+						s = s.replace("truncate", "delete");
+						s = s.replace("table", "from");
+					}
 					System.out.println(database.executeUpdateQuery(s));
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			} else if(!s.contains("")) {
+			} else if (!s.contains("")) {
 				throw new SQLException("SYNTAX ERROR");
 			}
 		}
