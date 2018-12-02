@@ -11,11 +11,5 @@
     
     
     
-    <row>
-        <personid type="int">4</personid>
-        <lastname type="varchar">'abdelfattah'</lastname>
-        <firstname type="varchar">'mohamed'</firstname>
-        <address type="varchar">'alsoyouf'</address>
-        <city type="varchar">'alexandaria'</city>
-    </row>
+    
 </persons>
