@@ -62,10 +62,10 @@ public class ParserMethod3 {
         if(lines.length>1) {
             insertD+="\\s*\\)\\s*";
         }
-        insertD+="VALUES\\s*\\(\\s*('.*[^'\";\\s]'|\\d+)";
+        insertD+="VALUES\\s*\\(\\s*('.*[^'\";\\s]'|-?\\d+)";
 
         for(int counter =0;counter <second ;counter++) {
-            insertD+="\\s*,\\s*('.*[^'\";\\s]'|\\d+)";
+            insertD+="\\s*,\\s*('.*[^'\";\\s]'|-?\\d+)";
         }
         insertD+="\\s*\\)\\s*;?\\s*";
 
@@ -162,7 +162,7 @@ public class ParserMethod3 {
     }
 
     private String UpdateDRegex(String s) {
-        String updateD ="^\\s*UPDATE\\s+(\\w+)\\s+SET\\s+(\\w+)\\s*=\\s*('.*[^'\";\\s]'|\\d+)\\s*";
+        String updateD ="^\\s*UPDATE\\s+(\\w+)\\s+SET\\s+(\\w+)\\s*=\\s*('.*[^'\";\\s]'|-?\\d+)\\s*";
         Pattern pattern1 = Pattern.compile(updateD, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern1.matcher(s);
         matcher.find();
@@ -187,7 +187,7 @@ public class ParserMethod3 {
 	*/
         String s1 = s.toLowerCase();
         if(s1.contains("where")) {
-            regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*('.*[^'\";\\s]'|\\d+)\\s*)\\s*;?\\s*";
+            regex+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*('.*[^'\";\\s]'|-?\\d+)\\s*)\\s*;?\\s*";
             }else {
 
             }
@@ -201,7 +201,7 @@ public class ParserMethod3 {
         String deleteD ="^\\s*delete\\s+from\\s+(\\w+)\\s*;?";
         String s1 = query.toLowerCase();
         if(s1.contains("where")) {
-        	deleteD+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*('.*[^'\";\\s]'|\\d+)\\s*)\\s*;?\\s*";
+        	deleteD+="(\\s+where\\s+(\\w+)\\s*([=<>]{1})\\s*('.*[^'\";\\s]'|-?\\d+)\\s*)\\s*;?\\s*";
             }else {
 
             }

@@ -113,7 +113,7 @@ public class ParserMethod2 {
     private String createVeryComRegex(String query){
         String sf="^\\s*SELECT\\s+\\*\\s+FROM\\s(\\w+)\\s*;?\\s*";
         String ss=createComRegex(query);
-        String where = "\\s*WHERE\\s+(\\w+)\\s*([=<>])\\s*('.*[^'\";\\s]'|\\d+)\\s*;?\\s*";
+        String where = "\\s*WHERE\\s+(\\w+)\\s*([=<>])\\s*('.*[^'\";\\s]'|-?\\d+)\\s*;?\\s*";
         Pattern pattern = Pattern.compile(sf+where,CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(query);
         if(matcher.find()&&compeleteRegex(query,sf+where)){
