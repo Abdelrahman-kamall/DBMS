@@ -26,11 +26,11 @@ public class dropTable {
             Files.deleteIfExists(Paths.get(path + "\\" + tableName + ".dtd"));
             success = true;
         } catch (NoSuchFileException e) {
-            System.out.println("No such file/directory exists");
+            //System.out.println("No such file/directory exists");
         } catch (DirectoryNotEmptyException e) {
-            System.out.println("Directory is not empty.");
+            //System.out.println("Directory is not empty.");
         } catch (IOException e) {
-            System.out.println("Invalid permissions.");
+           //System.out.println("Invalid permissions.");
         }
     }
 }

@@ -8,6 +8,7 @@ public class SQLOrder {
 
     private boolean firstInstance = true;
     private String database = null;
+    private String table_head = null;
     private static final SQLOrder instance = new SQLOrder();
 
     private SQLOrder() {
@@ -84,9 +85,16 @@ public class SQLOrder {
         }
     }
 
+    public String getTable_head() {
+        return table_head;
+    }
+
     public Object[][] select(String name, String[] cols, Object[][] condition) {
-        if(database!=null)
-        return selectTable.selectCols(database+"\\"+name+".xml", name, cols, condition);
+        if(database!=null) {
+            table_head = database + "\\" + name + ".xml";
+            return selectTable.selectCols(database + "\\" + name + ".xml", name, cols, condition);
+
+        }
         else return null;
     }
 }

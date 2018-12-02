@@ -23,7 +23,7 @@ public class InsertTable {
             cols[0] = DTDGenerator.getDTDColumns(pp);
         }
         int no = 0;
-        if (!validateCols.validate(cols[0], path)) {
+        if (!validateCols.validate(cols[0], path) || !validateCols.validatetypes(cols,path)) {
             return 0;
         }
         try {

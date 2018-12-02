@@ -2,6 +2,8 @@ package eg.edu.alexu.csd.oop.db.cs04.XML;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -38,6 +40,9 @@ public class Update {
 			File file = new File(filepath);
 			if(!file.exists()) {
 				return -1;
+			}
+			if (!validateCols.validatetypesObject(update_value,filepath)) {
+				return 0;
 			}
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();

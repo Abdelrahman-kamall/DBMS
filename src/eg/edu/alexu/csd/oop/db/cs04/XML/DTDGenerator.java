@@ -52,10 +52,9 @@ public class DTDGenerator {
         String[] x = null;
         try {
             FileReader fileReader = new FileReader(new File(path));
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String regex = "[\\(,\\)]";BufferedReader bufferedReader = new BufferedReader(fileReader);
             bufferedReader.readLine();
             bufferedReader.readLine();
-            String regex = "[\\(,\\)]";
             x = bufferedReader.readLine().split(regex);
             String[] cols = new String[x.length-2];
             for (int i=1;i<x.length-1;i++) {
@@ -77,6 +76,10 @@ public class DTDGenerator {
             FileReader fileReader = new FileReader(new File(path));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String regex = "[\"]";
+            bufferedReader.readLine();
+            bufferedReader.readLine();
+            bufferedReader.readLine();
+            bufferedReader.readLine();
             List<List<String>> colstypes = new ArrayList<>();
             colstypes.add(Arrays.asList(getDTDColumns(p)));
             String[] types = new String[colstypes.get(0).size()];

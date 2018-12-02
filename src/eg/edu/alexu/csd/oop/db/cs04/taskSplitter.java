@@ -1,6 +1,8 @@
 package eg.edu.alexu.csd.oop.db.cs04;
 
 import eg.edu.alexu.csd.oop.db.Database;
+import eg.edu.alexu.csd.oop.db.cs04.XML.DTDGenerator;
+import eg.edu.alexu.csd.oop.db.cs04.XML.SQLOrder;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -19,7 +21,25 @@ public class taskSplitter {
                 }
             }else if(s.contains("select")){
                 try {
-                    System.out.println(Arrays.deepToString(database.executeQuery(s)));
+                    Object[][] o = database.executeQuery(s);
+                    String x = SQLOrder.getInstance().getTable_head();
+                    x = x.replace(".xml",".dtd");
+                    String[] strings = DTDGenerator.getDTDColumns(x);
+                    for (int j = 0; j < strings.length; j++) {
+                            System.out.printf("%-15s",strings[j]);
+                    }
+                    System.out.println();
+                    for(int i=0;i<o.length;i++) {
+                        for (int j = 0; j < o[0].length; j++) {
+                            if(o[i][j] instanceof Integer){
+                                System.out.printf("%-15d",o[i][j]);
+                            }else{
+                                System.out.printf("%-15s",o[i][j]);
+                            }
+                        }
+                        System.out.println();
+                    }
+                    //printSelect.print(database.executeQuery(s));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

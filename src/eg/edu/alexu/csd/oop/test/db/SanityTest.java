@@ -47,7 +47,7 @@ public class SanityTest {
 			fail("Bad query succeeded!");
 		} catch (Throwable e){
 		}
-
+//8lat
 		try {
 			createDatabase(db, "TestDB", true);
 			db.executeStructureQuery("CREATE TABLE table_name4(column_name1 varchar, column_name2 int, column_name3 varchar)");
@@ -56,7 +56,7 @@ public class SanityTest {
 			fail("Bad query succeeded!");
 		} catch (Throwable e){
 		}
-
+//8lat
 		try {
 			createDatabase(db, "TestDB", true);
 			db.executeStructureQuery("CREATE TABLE table_name5(column_name1 varchar, column_name2 int, column_name3 varchar)");
@@ -65,7 +65,7 @@ public class SanityTest {
 			fail("Bad query succeeded!");
 		} catch (Throwable e){
 		}
-
+//8lat
 		try {
 			createDatabase(db, "TestDB", true);
 			db.executeStructureQuery("CREATE TABLE table_name6(column_name1 varchar, column_name2 int, column_name3 varchar)");
@@ -82,7 +82,7 @@ public class SanityTest {
 			fail("Bad query succeeded!");
 		} catch (Throwable e){
 		}
-
+//8alat
 		try {
 			createDatabase(db, "TestDB", true);
 			db.executeStructureQuery("CREATE TABLE table_name8(column_name1 varchar, column_name2 int, column_name3 varchar)");
