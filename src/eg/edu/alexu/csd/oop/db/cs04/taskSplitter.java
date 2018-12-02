@@ -67,7 +67,7 @@ public class taskSplitter {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			} else if (!s.contains("")) {
+			} else if (!s.equals("")) {
 				throw new SQLException("SYNTAX ERROR");
 			}
 		}
